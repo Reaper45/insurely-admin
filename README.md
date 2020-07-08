@@ -1,6 +1,7 @@
-# insurely-admin
+# Insurely Admin
 Insurely - Sell insurance products.
-> Its just an ordinary [Laravel Application](https://laravel.com/) with [tailwindcss](ilwindcss.com) styling nothing fancy. Really!
+
+> This project was bootstrapped with [Laravel Application](https://laravel.com/) and [tailwindcss](https://tilwindcss.com) styling nothing fancy!
 
 ## Getting started
 1. Clone app and install dependencies
