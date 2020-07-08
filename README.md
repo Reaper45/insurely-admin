@@ -48,8 +48,7 @@ docker-compose up
 ## Deployment
 Follow [Laravel Docs](https://laravel.com/docs/7.x/deployment) for server configuration
 
-### Requirement
-1. Remember to correctly specify the environment in your production `.env` file
+- Remember to correctly specify the environment in your production `.env` file
 
 ```bash
 APP_ENV=production
