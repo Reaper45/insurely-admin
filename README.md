@@ -11,6 +11,9 @@ cd insurely-admin/
 
 composer install
 
+yarn install
+
+yarn run dev
 ```
 2. Rename `.env.example` file to `.env`
 3. Generate a key for Laravel's encrypter
