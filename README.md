@@ -1,4 +1,4 @@
-# insurely-app
+# insurely-admin
 Insurely - Sell insurance products.
 > Its just an ordinary [Laravel Application](https://laravel.com/) with [tailwindcss](ilwindcss.com) styling nothing fancy. Really!
 
