@@ -1,2 +1,2 @@
-# insurely-app
+# insurely-admin
 Insurely - Sell insurance products.
