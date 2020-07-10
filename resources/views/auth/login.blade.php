@@ -17,11 +17,11 @@
                 <div class="-mt-px relative">
                     <input aria-label="Password" name="password" type="password" required  value="{{ old('password') ? old('password') : env('ADMIN_PASS') }}" class="@error('email') border-red-500 @enderror appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-7" placeholder="Password" />
                 </div>
-                    @error('email')
-                        <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
-                        @enderror
+                @error('email')
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                    @enderror
                 @error('password')
-                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                 @enderror
             </div>
 
