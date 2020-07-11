@@ -43,6 +43,8 @@ php artisan artisan serve
 #or
 
 docker-compose up
+
+docker-compose exec app php artisan migrate --seed
 ```
 
 

@@ -1,0 +1,30 @@
+version: '3'
+services:
+    app:
+        build: .docker
+        restart: always
+        # working_dir: /app
+        volumes:
+            - ./.docker/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+            - ./.docker/conf/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - .:/var/www/html
+            # - ./:/app
+        command: "php artisan serve --host=0.0.0.0 --port=8000"
+        ports:
+            - 8000:8000
+    composer:
+        image: composer
+        volumes:
+            - .:/app
+        command: install
+    db:
+        image: postgres:10.1
+        restart: always
+        environment:
+            - POSTGRES_DB=${DB_DATABASE}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+        ports:
+            - 5432:5432
+        volumes:
+            - ./.docker/conf/postgres/:/docker-entrypoint-initdb.d/
