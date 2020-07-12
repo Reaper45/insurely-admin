@@ -14,8 +14,8 @@ class ProductBenefits extends Migration
     public function up()
     {
         Schema::create('product_benefits', function (Blueprint $table) {
-            $table->integer('product_id')->unsigned();
-            $table->integer('benefit_id')->unsigned();
+            $table->foreignId('product_id');
+            $table->foreignId('benefit_id');
 
             $table->foreign('product_id', 'pb_foreign_product')
                     ->references('id')

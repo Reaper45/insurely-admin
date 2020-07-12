@@ -16,7 +16,10 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
-            $table->boolean("is_active")->default(true);;
+            $table->boolean("is_active")->default(true);
+            $table->foreignId('insurer_id');
+            $table->foreignId('category_id');
+            $table->foreignId('insurance_class_id');
             $table->timestamps();
 
             $table->foreign('insurer_id')->references('id')->on('insurers');
