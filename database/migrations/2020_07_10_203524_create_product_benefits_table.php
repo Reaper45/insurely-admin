@@ -14,20 +14,19 @@ class ProductBenefits extends Migration
     public function up()
     {
         Schema::create('product_benefits', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('product_id');
             $table->foreignId('benefit_id');
 
             $table->foreign('product_id', 'pb_foreign_product')
                     ->references('id')
-                    ->on('products')
-                    ->onDelete('cascade');
+                    ->on('products');
 
             $table->foreign('benefit_id', 'pb_foreign_benefit')
                     ->references('id')
-                    ->on('benefits')
-                    ->onDelete('cascade');
+                    ->on('benefits');
 
-            $table->unique(['product_id', 'benefit_id']);
+            // $table->unique(['product_id', 'benefit_id']);
         });
     }
 

@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class InsuranceClass extends Model
 {
     //
+    public function products()
+    {
+        # code...
+        return $this->hasMany(Product::class);
+    }
 }
