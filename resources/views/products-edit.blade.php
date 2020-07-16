@@ -15,7 +15,7 @@
                         Product
                     </div>
                     <div class="text-gray-500 text-xs">
-                        Infoimation abut the product
+                        Infoimation about the product
                     </div>
                 </div>
                 <div class="w-2/3">
