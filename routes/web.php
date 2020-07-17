@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,3 @@ Route::get('settings/', 'SettingController@index')->name('settings');
 Route::get('settings/benefits', 'SettingController@benefits')->name('settings.benefits');
 
 Route::get('settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
-
-Route::post('api/send-otp', 'ApiController@sendOtp')->name('api.sendOtp');
-Route::post('api/calculate-quote', 'ApiController@calculateQuote')->name('api.calculateQuote');
-

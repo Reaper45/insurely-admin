@@ -6,7 +6,7 @@ use AfricasTalking\SDK\AfricasTalking;
 
 class SMS
 {
-    public static function sendSMS($to, $message, $from)
+    public static function sendSMS($to, $message, $from = null)
     {
         $username = env('AT_USERNAME');
         $apiKey = env('AT_API_KEY');

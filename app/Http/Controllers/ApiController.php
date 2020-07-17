@@ -73,7 +73,7 @@ class ApiController extends Controller
             $product_totals = $product_tariffs_totals + $product_charges_totals;
             $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
 
-            $quoteArr.push(array('productTotals' => $product_totals, 'benefitsTotals' => $benefits_totals, 'sumInsured' => $sumInsured));
+            $quoteArr[array('productTotals' => $product_totals, 'benefitsTotals' => $benefits_totals, 'sumInsured' => $sumInsured)];
         }
 
         return response()->json($quoteArr);
@@ -87,10 +87,11 @@ class ApiController extends Controller
 
     public function sendOtp(Request $request)
     {
+        $from = 
         $userId = $request->input('userId');
 
         // Check if user is valid
-        $user = User::find(int($userId));
+        $user = User::find($userId);
 
         if ($user) {
 

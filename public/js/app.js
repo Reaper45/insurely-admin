@@ -28620,14 +28620,14 @@ if (false) {} else {
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+__webpack_require__(/*! ./components/EditProduct */ "./resources/js/components/EditProduct.js");
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
+/***/ "./resources/js/components/EditProduct.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/EditProduct.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -28640,7 +28640,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Example() {
+function EditProduct() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -28658,8 +28658,8 @@ function Example() {
 
 /* harmony default export */ __webpack_exports__["default"] = (Example);
 
-if (document.getElementById('example')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
+if (document.getElementById("edit-product")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EditProduct, null), document.getElementById("edit-product"));
 }
 
 /***/ }),
@@ -28682,8 +28682,8 @@ if (document.getElementById('example')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/jo/code/insurely/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/jo/code/insurely/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/jo/code/insurely-admin/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/jo/code/insurely-admin/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
