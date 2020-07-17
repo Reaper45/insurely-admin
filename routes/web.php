@@ -39,3 +39,6 @@ Route::get('settings/benefits', 'SettingController@benefits')->name('settings.be
 
 Route::get('settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
 
+Route::post('api/send-otp', 'ApiController@sendOtp')->name('api.sendOtp');
+Route::post('api/calculate-quote', 'ApiController@calculateQuote')->name('api.calculateQuote');
+
