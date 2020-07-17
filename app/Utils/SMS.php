@@ -6,11 +6,12 @@ use AfricasTalking\SDK\AfricasTalking;
 
 class SMS
 {
-    public static function sendSMS($to, $message)
+    public static function sendSMS($to, $message, $from)
     {
         $username = env('AT_USERNAME');
-        $apiKey   = env('AT_API_KEY');
-        $AT       = new AfricasTalking($username, $apiKey);
+        $apiKey = env('AT_API_KEY');
+        $senderId = env('AT_SENDERID');
+        $AT = new AfricasTalking($username, $apiKey);
 
         // Get one of the services
         $sms = $AT->sms();
@@ -18,7 +19,8 @@ class SMS
         // Use the service
         $result = $sms->send([
             'to'      => $to,
-            'message' => $message
+            'message' => $message,
+            'from' => $from || $senderId
         ]);
 
         return $result;
