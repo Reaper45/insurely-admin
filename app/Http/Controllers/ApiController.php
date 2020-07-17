@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Category;
 use App\User;
@@ -30,9 +31,9 @@ class ApiController extends Controller
     {
         $allowedChars = '0123456789';
         $otp = '';
-        for ($index = 0; $index < length; ++$index) {
-            $charIndex = rand(0, str_len($allowsChars) - 1);
-            $otp += $allowedChars[$charIndex];
+        for ($index = 0; $index < $length; ++$index) {
+            $charIndex = rand(0, Str::length($allowedChars) - 1);
+            $otp = $otp . $allowedChars[$charIndex];
         }
         return $otp;
     }
