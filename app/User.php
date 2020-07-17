@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function mfaDetails()
+    {
+        return $this->hasMany(MFADetails::class);
+    }
 }
