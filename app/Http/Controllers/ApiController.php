@@ -87,8 +87,8 @@ class ApiController extends Controller
 
     public function sendOtp(Request $request)
     {
-        $from = 
-        $userId = $request->input('userId');
+        $from = "";
+        $userId = $request->input('user_id');
 
         // Check if user is valid
         $user = User::find($userId);
@@ -99,10 +99,11 @@ class ApiController extends Controller
             $otp = $this->generateSMSOTP();
 
             // Write token to DB
-            $mfa_details = new MFADetails([
-                'secret' => $otp,
-                'expires_in' => date("m/d/Y h:i:s a", time() + 90),
-            ]);
+            $mfa_details = new MFADetails;
+            $mfa_details->secret = $otp;
+            $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + 90);
+            
+            $mfa_details->save();
 
             $message = "Hey {$user->name}, your OTP is ${otp}";
 
