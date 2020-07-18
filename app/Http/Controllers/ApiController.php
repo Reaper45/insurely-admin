@@ -9,6 +9,7 @@ use App\Category;
 use App\User;
 use App\MFADetails;
 use App\Utils\SMS;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -114,9 +115,14 @@ class ApiController extends Controller
     {
         $phoneNumber = $request->input('phoneNumber');
         $code = $request->input('code');
+        
+        $mfa = MFADetails::where('phone_number', $phoneNumber)->where('secret', $code)->first();
+        Log::info($mfa);
 
-        return response()->json(['message' => 'Success'], 200);
-
+        if($mfa) {
+            return response()->json(['message' => 'Verification successful', 'verified' => true], 200);
+        }
+        return response()->json(['message' => 'Failed verification', 'verified' => false], 200);
     }
 
 }
