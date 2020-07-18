@@ -12,4 +12,9 @@ class MFADetails extends Model
      * @var string
      */
     protected $table = 'user_mfa_details';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

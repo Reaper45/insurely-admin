@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use AfricasTalking\SDK\AfricasTalking;
+use Illuminate\Support\Facades\Log;
 
 class SMS
 {
@@ -10,7 +11,7 @@ class SMS
     {
         $username = env('AT_USERNAME');
         $apiKey = env('AT_API_KEY');
-        $senderId = env('AT_SENDERID');
+        // $senderId = env('AT_SENDER_ID');
         $AT = new AfricasTalking($username, $apiKey);
 
         // Get one of the services
@@ -20,8 +21,9 @@ class SMS
         $result = $sms->send([
             'to'      => $to,
             'message' => $message,
-            'from' => $from || $senderId
+            // 'from' => $from || $senderId
         ]);
+        Log::info($result);
 
         return $result;
     }

@@ -20,5 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (){
     Route::post('/send-otp', 'ApiController@sendOtp');
+
+    Route::post('/verify-otp', 'ApiController@verifyOTP');
+
     Route::post('/calculate-quote', 'ApiController@calculateQuote');
 });

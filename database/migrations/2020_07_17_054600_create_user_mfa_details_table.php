@@ -15,15 +15,12 @@ class CreateUserMFADetailsTable extends Migration
     {
         Schema::create('user_mfa_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string("mfa_type")->unique();
+            // $table->foreignId('user_id');
+            $table->string('phone_number');
+            // $table->string("mfa_type")->unique();
             $table->string("secret");
             $table->timestamp("expires_in");
             $table->timestamps();
-
-            $table->foreign('user_id', 'pt_foreign_user')
-                    ->references('id')
-                    ->on('users');
         });
     }
 
@@ -34,9 +31,6 @@ class CreateUserMFADetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_mfa_details', function (Blueprint $table) {
-            $table->dropForeign('pt_foreign_users');
-        });        
         Schema::dropIfExists('user_mfa_details');
     }
 }

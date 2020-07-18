@@ -87,32 +87,36 @@ class ApiController extends Controller
 
     public function sendOtp(Request $request)
     {
-        $from = "";
-        $userId = $request->input('user_id');
+        $phoneNumber = $request->input('phoneNumber');
 
-        // Check if user is valid
-        $user = User::find($userId);
+        // Generate token
+        $otp = $this->generateSMSOTP();
 
-        if ($user) {
+        // Write token to DB
+        $mfa_details = new MFADetails;
+        $mfa_details->secret = $otp;
+        // $mfa_details->mfa_type = "";
+        $mfa_details->phone_number = $phoneNumber;
+        $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + 90);
+        
+        $mfa_details->save();
 
-            // Generate token
-            $otp = $this->generateSMSOTP();
+        $message = "Hey, your OTP is ${otp}";
 
-            // Write token to DB
-            $mfa_details = new MFADetails;
-            $mfa_details->secret = $otp;
-            $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + 90);
-            
-            $mfa_details->save();
+        // Send out token
+        SMS::sendSMS($phoneNumber, $message);
 
-            $message = "Hey {$user->name}, your OTP is ${otp}";
+        return response()->json(['message' => 'Success'], 200);
+        // return response()->json(['message' => 'Invalid User'], 400);
+    }
 
-            // Send out token
-            SMS::sendSMS($user->phoneNumber, $message);
+    public function verifyOTP(Request $request)
+    {
+        $phoneNumber = $request->input('phoneNumber');
+        $code = $request->input('code');
 
-            return response()->json(['message' => 'Success'], 200);
-        }
-        return response()->json(['message' => 'Invalid User'], 400);
+        return response()->json(['message' => 'Success'], 200);
+
     }
 
 }
