@@ -3,7 +3,6 @@
 namespace App\Utils;
 
 use AfricasTalking\SDK\AfricasTalking;
-use Illuminate\Support\Facades\Log;
 
 class SMS
 {
@@ -23,7 +22,6 @@ class SMS
             'message' => $message,
             // 'from' => $from || $senderId
         ]);
-        Log::info($result);
 
         return $result;
     }
