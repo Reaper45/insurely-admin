@@ -21,6 +21,9 @@ class ApiController extends Controller
             // Check if active
             if ($tariff->is_active) {
                 // is percentage
+                if ($tariff->is_percentage) {
+                    $total += ($sumInsured * (1 + $tariff->value));
+                }
                 $total += $sumInsured * $tariff->value;
             }   
             $total += $tariff->value;
@@ -124,5 +127,4 @@ class ApiController extends Controller
         }
         return response()->json(['message' => 'Failed verification', 'verified' => false], 200);
     }
-
 }
