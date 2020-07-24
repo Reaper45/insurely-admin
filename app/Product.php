@@ -12,7 +12,7 @@ class Product extends Model
     public function tariffs()
     {
         # code...
-        return $this->hasMany(Tariff::class, 'product_tariffs');
+        return $this->belongsToMany(Tariff::class, 'product_tariffs' , 'product_id', 'tariff_id');
     }
 
     /**
@@ -49,7 +49,7 @@ class Product extends Model
     public function category()
     {
         # code...
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -58,6 +58,6 @@ class Product extends Model
     public function insuranceClass()
     {
         # code...
-        return $this->hasOne(InsuranceClass::class);
+        return $this->belongsTo(InsuranceClass::class);
     }       
 }

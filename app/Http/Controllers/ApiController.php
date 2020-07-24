@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Category;
+use App\Http\Controllers\Traits\ControllerHelpers;
+use App\InsuranceClass;
 use App\User;
 use App\MFADetails;
 use App\Utils\SMS;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
+    // Adds helper methods to the controller
+    use ControllerHelpers;
 
     private function sumTariffs($tariffs, $sumInsured)
     {
@@ -80,8 +84,8 @@ class ApiController extends Controller
             $quoteArr[array('productTotals' => $product_totals, 'benefitsTotals' => $benefits_totals, 'sumInsured' => $sumInsured)];
         }
 
-        return response()->json($quoteArr);
-        
+        return response()->json();
+        return response($this->api_response(true, $quoteArr, null), 200);
     }
     
     public function sendEmail()
@@ -110,7 +114,7 @@ class ApiController extends Controller
         // Send out token
         SMS::sendSMS($phoneNumber, $message);
 
-        return response()->json(['message' => 'Success'], 200);
+        return response($this->api_response(true, null, 'Success'), 200);
         // return response()->json(['message' => 'Invalid User'], 400);
     }
 
@@ -123,8 +127,29 @@ class ApiController extends Controller
         Log::info($mfa);
 
         if($mfa) {
-            return response()->json(['message' => 'Verification successful', 'verified' => true], 200);
+            return response($this->api_response(true, ['verified' => true], "Verification successful"), 200);
         }
-        return response()->json(['message' => 'Failed verification', 'verified' => false], 200);
+        return response($this->api_response(false, ['verified' => false], 'Failed verification'), 200);
+    }
+
+    // All classes
+    public function getClasses()
+    {
+        $classes = InsuranceClass::all();
+        return response($this->api_response(true, $classes, null), 200);
+    }
+
+    // Class by id
+    public function getClass($class_id)
+    {
+        $class = InsuranceClass::find($class_id);
+        return response($this->api_response(true, $class->load('categories'), null), 200);
+    }
+
+    // Class categories
+    public function getCategories($class_id)
+    {
+        $categories = Category::where("insurance_class_id", $class_id)->get();
+        return response($this->api_response(true, $categories, null), 200);
     }
 }

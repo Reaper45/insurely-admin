@@ -12,4 +12,11 @@ class InsuranceClass extends Model
         # code...
         return $this->hasMany(Product::class);
     }
+
+    //
+    public function categories()
+    {
+        # code...
+        return $this->hasMany(Category::class);
+    }
 }

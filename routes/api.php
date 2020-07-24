@@ -24,4 +24,14 @@ Route::prefix('v1')->group(function (){
     Route::post('/verify-otp', 'ApiController@verifyOTP');
 
     Route::post('/calculate-quote', 'ApiController@calculateQuote');
+
+    // All classes
+    Route::get('/classes', 'ApiController@getClasses');
+
+    // Class by id
+    Route::get('/classes/{class_id}', 'ApiController@getClass');
+    
+    // Class categories
+    Route::get('/classes/{class_id}/categories', 'ApiController@getCategories');
+
 });
