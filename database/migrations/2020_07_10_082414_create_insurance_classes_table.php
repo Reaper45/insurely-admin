@@ -17,6 +17,11 @@ class CreateInsuranceClassesTable extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->float("value");
+            $table->foreignId("parent_id")->nullable();
+
+            $table->foreign('parent_id')
+                    ->references('id')
+                    ->on('insurance_classes');
             $table->timestamps();
         });
     }

@@ -84,7 +84,6 @@ class ApiController extends Controller
             $quoteArr[array('productTotals' => $product_totals, 'benefitsTotals' => $benefits_totals, 'sumInsured' => $sumInsured)];
         }
 
-        return response()->json();
         return response($this->api_response(true, $quoteArr, null), 200);
     }
     
@@ -115,7 +114,6 @@ class ApiController extends Controller
         SMS::sendSMS($phoneNumber, $message);
 
         return response($this->api_response(true, null, 'Success'), 200);
-        // return response()->json(['message' => 'Invalid User'], 400);
     }
 
     public function verifyOTP(Request $request)
@@ -143,7 +141,7 @@ class ApiController extends Controller
     public function getClass($class_id)
     {
         $class = InsuranceClass::find($class_id);
-        return response($this->api_response(true, $class->load('categories'), null), 200);
+        return response($this->api_response(true, $class->load('categories', 'parent', 'children'), null), 200);
     }
 
     // Class categories

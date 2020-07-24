@@ -19,4 +19,18 @@ class InsuranceClass extends Model
         # code...
         return $this->hasMany(Category::class);
     }
+    
+    //
+    public function parent()
+    {
+        # code...
+        return $this->belongsTo(self::class, "parent_id", "id");
+    }
+    
+    //
+    public function children()
+    {
+        # code...
+        return $this->hasMany(self::class, "parent_id");
+    }
 }

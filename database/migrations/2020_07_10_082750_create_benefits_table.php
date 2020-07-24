@@ -16,6 +16,9 @@ class CreateBenefitsTable extends Migration
         Schema::create('benefits', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
+            $table->string("limit");
+            $table->string("description");
+            $table->boolean("is_optional");
             $table->boolean("is_active")->default(true);
             $table->timestamps();
         });

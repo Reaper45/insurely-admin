@@ -17,7 +17,7 @@ class CreateInsurersTable extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->string("email");
-            $table->string("logo");
+            $table->string("logo")->nullable();
             $table->string("telephone");
             $table->boolean("is_active")->default(true);;
             $table->timestamps();
