@@ -18,6 +18,8 @@ class ApiController extends Controller
     // Adds helper methods to the controller
     use ControllerHelpers;
 
+    private $OTP_EXP_IN = 90;
+
     private function sumTariffs($tariffs, $sumInsured)
     {
         $total = 0;
@@ -104,7 +106,7 @@ class ApiController extends Controller
         $mfa_details->secret = $otp;
         // $mfa_details->mfa_type = "";
         $mfa_details->phone_number = $phoneNumber;
-        $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + 90);
+        $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + $this->OTP_EXP_IN);
         
         $mfa_details->save();
 
@@ -125,29 +127,36 @@ class ApiController extends Controller
         Log::info($mfa);
 
         if($mfa) {
+            $has_expired = date("Y-m-d H:i:s") > $mfa->expires_in;
+            if($has_expired) {
+                return response($this->api_response(false, ['verified' => false], 'OTP code has expired'), 200);
+            }
             return response($this->api_response(true, ['verified' => true], "Verification successful"), 200);
         }
         return response($this->api_response(false, ['verified' => false], 'Failed verification'), 200);
     }
 
-    // All classes
     public function getClasses()
     {
         $classes = InsuranceClass::all();
-        return response($this->api_response(true, $classes, null), 200);
+        return response($this->api_response(true, ["classes" => $classes], null), 200);
     }
 
-    // Class by id
     public function getClass($class_id)
     {
         $class = InsuranceClass::find($class_id);
-        return response($this->api_response(true, $class->load('categories', 'parent', 'children'), null), 200);
+        return response($this->api_response(true, ["class" => $class->load('parent', 'children')], null), 200);
     }
 
-    // Class categories
+    public function getSubClasses($class_id)
+    {
+        $class = InsuranceClass::find($class_id)->load('children');
+        return response($this->api_response(true, ["sub_classes" => $class->children], null), 200);
+    }
+
     public function getCategories($class_id)
     {
         $categories = Category::where("insurance_class_id", $class_id)->get();
-        return response($this->api_response(true, $categories, null), 200);
+        return response($this->api_response(true, ["categories" => $categories], null), 200);
     }
 }

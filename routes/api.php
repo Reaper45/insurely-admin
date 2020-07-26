@@ -31,6 +31,9 @@ Route::prefix('v1')->group(function (){
     // Class by id
     Route::get('/classes/{class_id}', 'ApiController@getClass');
     
+    // Subclasses
+    Route::get('/classes/{class_id}/subclasses', 'ApiController@getSubClasses');
+
     // Class categories
     Route::get('/classes/{class_id}/categories', 'ApiController@getCategories');
 
