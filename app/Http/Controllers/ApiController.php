@@ -28,9 +28,11 @@ class ApiController extends Controller
             if ($tariff->is_active) {
                 // is percentage
                 if ($tariff->is_percentage) {
-                    $total += ($sumInsured * (1 + $tariff->value));
+                    $total += ($sumInsured * ($tariff->value / 100));
+                    break;
                 }
                 $total += $sumInsured * $tariff->value;
+                break;
             }   
             $total += $tariff->value;
         }
@@ -55,38 +57,60 @@ class ApiController extends Controller
 
     public function calculateQuote(Request $request)
     {
-        // ID category
         $categoryId = $request->input('categoryId');
-        // Sum Insured
         $sumInsured = $request->input('sumInsured');
         
         // Fetch products under category
         $products = Category::find($categoryId)->products;
 
         // Calculate price for each product
-        $quoteArr = [];
-        foreach($products as $product) {
-            $product_tariffs = $product->tariff;
-            $product_charges = $product->charges;
-            $benefits_charges = $product->benefits->charges;
-            $benefits_tariffs = $product->benefits->tariffs;
+        if($products->count() !== 0){
+            $quoteArr = [];
+            foreach($products as $product) {
+                $product_tariffs = $product->tariffs;
+                $product_charges = $product->charges;
 
-            // Tariff totals
-            $product_tariffs_totals = $this->sumTariffs($product_tariffs, $sumInsured);
-            $benefits_tariffs_totals = $this->sumTariffs($benefits_tariffs, $sumInsured);
+                // $product_benefits = $product->benefits;
+                $benefits_charges = [];
+                $benefits_tariffs = [];
 
-            // Charge totals
-            $product_charges_totals = $this->sumTariffs($product_charges, $sumInsured);
-            $benefits_charges_totals = $this->sumTariffs($benefits_charges, $sumInsured);
-            
-            // Product & Benefit totals
-            $product_totals = $product_tariffs_totals + $product_charges_totals;
-            $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
+                foreach($product->benefits as $product_benefit) {
+                    $product_benefit->with('charges');
+                    array_push($benefits_charges, ...$product_benefit->charges);
+                    array_push($benefits_tariffs, ...$product_benefit->tariffs);
+                }
+                // $benefits_charges = $product->benefits->charges;
+                // $benefits_tariffs = $product->benefits->tariffs;
 
-            $quoteArr[array('productTotals' => $product_totals, 'benefitsTotals' => $benefits_totals, 'sumInsured' => $sumInsured)];
+                // Tariff totals
+                $product_tariffs_totals = $this->sumTariffs($product_tariffs, $sumInsured);
+                $benefits_tariffs_totals = $this->sumTariffs($benefits_tariffs, $sumInsured);
+
+                // Charge totals
+                $product_charges_totals = $this->sumTariffs($product_charges, $sumInsured);
+                $benefits_charges_totals = $this->sumTariffs($benefits_charges, $sumInsured);
+                
+                // Product & Benefit totals
+                $product_totals = $product_tariffs_totals + $product_charges_totals;
+                $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
+
+                // dd($product_tariffs_totals, $product_charges_totals);
+
+                array_push($quoteArr, [
+                    'premium' => $product_totals,
+                    'benefits_totals' => $benefits_totals,
+                    'sum_insured' => $sumInsured,
+                    // "has_ipf" => $product->has_ipf,
+                    "product_id" => $product->id,
+                    "name" => $product->name,
+                    "insurer" => $product->insurer,
+                    "benefits" => $product->benefits,
+                ]);
+            }
+
+            return response($this->api_response(true, ["quotes" => $quoteArr], null), 200);
         }
-
-        return response($this->api_response(true, $quoteArr, null), 200);
+        return response($this->api_response(true, null, "No products were found"), 200);
     }
     
     public function sendEmail()

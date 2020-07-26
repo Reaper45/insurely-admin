@@ -31,7 +31,7 @@ class Product extends Model
     public function benefits()
     {
         # code...
-        return $this->hasMany(Benefit::class, 'product_benefits' , 'product_id', 'benefit_id');
+        return $this->belongsToMany(Benefit::class, 'product_benefits' , 'product_id', 'benefit_id');
     }
 
     /**

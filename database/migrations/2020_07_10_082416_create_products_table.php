@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->boolean("is_active")->default(true);
+            $table->boolean('has_ipf')->default(false);
             $table->foreignId('insurer_id');
             $table->foreignId('category_id');
             $table->foreignId('insurance_class_id');

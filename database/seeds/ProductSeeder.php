@@ -34,41 +34,41 @@ class ProductSeeder extends Seeder
                         ],
                         "benefits" => [
                             [
-                                "name" => "Third party personal injury",
-                                "limit" => "Kshs.3Million",
-                                "is_optional" => false,
+                                ["name" => "Third party personal injury"],
+                                ["limit" => "Kshs.3Million",
+                                "is_optional" => false]
                             ],
                             [
-                                "name" => "Third party property damage",
-                                "limit" =>" Kshs. 5 Million"
+                                ["name" => "Third party property damage"],
+                                ["limit" =>" Kshs. 5 Million"]
                             ],
                             [
-                                "name" => "Passenger legal liability",
-                                "description" => "Any one person - Kshs. 3 Million:Any one event - Kshs. 20 Million"
+                                ["name" => "Passenger legal liability"],
+                                ["description" => "Any one person - Kshs. 3 Million:Any one event - Kshs. 20 Million"]
                             ],
                             [
-                                "name" => "Radio cassette",
-                                "limit" => "Kshs. 30,000/="
+                                ["name" => "Radio cassette"],
+                                ["limit" => "Kshs. 30,000/="]
                             ],
                             [
-                                "name" => "Windscreen & window glass",
-                                "limit" => "Upto Kshs. 30, 000/="
+                                ["name" => "Windscreen & window glass"],
+                                ["limit" => "Upto Kshs. 30, 000/="]
                             ],
                             [
-                                "name" => "Medical expenses",
-                                "limit" => "Kshs.30,000/="
+                                ["name" => "Medical expenses"],
+                                ["limit" => "Kshs.30,000/="]
                             ],
                             [
-                                "name" => "Towing charges",
-                                "limit" => "Kshs. 50,000/="
+                                ["name" => "Towing charges"],
+                                ["limit" => "Kshs. 50,000/="]
                             ],
                             [
-                                "name" => "Repair Authority",
-                                "limit" => "kshs. 50,000/="
+                                ["name" => "Repair Authority"],
+                                ["limit" => "kshs. 50,000/="]
                             ],
                             [
-                                "name" => "Geographical",
-                                "limit" => "Kenya"
+                                ["name" => "Geographical"],
+                                ["limit" => "Kenya"]
                             ]
                         ]
                     ]
@@ -95,20 +95,20 @@ class ProductSeeder extends Seeder
                         ],
                         "benefits" => [
                             [
-                                "name" => "Third party only",
-                                "limit" => "kshs. 7,500/= "
+                                ["name" => "Third party only"],
+                                ["limit" => "kshs. 7,500/= "]
                             ],
                             [
-                                "name" => "New & Young",
-                                "limit" => "kshs 10,000/= additional"
+                                ["name" => "New & Young"],
+                                ["limit" => "kshs 10,000/= additional"]
                             ],
                             [
-                                "name" => "Third party property damage",
-                                "limit" => "kshs. 20,000,000/="
+                                ["name" => "Third party property damage"],
+                                ["limit" => "kshs. 20,000,000/="]
                             ],
                             [
-                                "name" => "Passenger Legal Liability",
-                                "limit" => "3M per person, 20M per event"
+                                ["name" => "Passenger Legal Liability"],
+                                ["limit" => "3M per person, 20M per event"]
                             ]
                         ]
                     ],
@@ -126,36 +126,36 @@ class ProductSeeder extends Seeder
                         ],
                         "benefits" => [
                             [
-                                "name" => "Theft With Anti Theft Device",
-                                "limit" => "Excess 10% of value Min Kshs. 20,000/-"
+                                ["name" => "Theft With Anti Theft Device"],
+                                ["limit" => "Excess 10% of value Min Kshs. 20,000/-"]
                             ],
                             [
-                                "name" => "Theft Without Anti theft Device",
-                                "limit" => "Excess 20% of value Min Kshs. 20,000/-"
+                                ["name" => "Theft Without Anti theft Device"],
+                                ["limit" => "Excess 20% of value Min Kshs. 20,000/-"]
                             ],
                             [
-                                "name" => "Third party only",
-                                "limit" => "Kshs. 7,500/= "
+                                ["name" => "Third party only"],
+                                ["limit" => "Kshs. 7,500/= "]
                             ],
                             [
-                                "name" => "New & Young",
-                                "limit" => "kshs 10,000/= additional"
+                                ["name" => "New & Young"],
+                                ["limit" => "kshs 10,000/= additional"]
                             ],
                             [
-                                "name" => "Windscreen",
-                                "limit" => "Kshs .30,000/-"
+                                ["name" => "Windscreen"],
+                                ["limit" => "Kshs .30,000/-"]
                             ],
                             [
-                                "name" => "Radio Cassette",
-                                "limit" => "Kshs. 30,000/-"
+                                ["name" => "Radio Cassette"],
+                                ["limit" => "Kshs. 30,000/-"]
                             ],
                             [
-                                "name" => "Third party property damage",
-                                "limit" => "kshs. 20,000,000/-"
+                                ["name" => "Third party property damage"],
+                                ["limit" => "kshs. 20,000,000/-"]
                             ],
                             [
-                                "name" => "Passenger Legal Liability",
-                                "limit" => "kshs. 3M per person, kshs. 20M per event"
+                                ["name" => "Passenger Legal Liability"],
+                                ["limit" => "kshs. 3M per person, kshs. 20M per event"]
                             ]
                         ]
                     ]
@@ -191,7 +191,14 @@ class ProductSeeder extends Seeder
 
                 $product->save();
 
-                // All charges (Training Levy, Stamp duty & IPCHF)
+                // Benefits
+                $benefits = $prod["benefits"];
+                foreach ($benefits as $benefit) {
+                    $created_benefit = App\Benefit::firstOrCreate(...$benefit);
+                    $product->benefits()->attach($created_benefit);
+                }
+
+                // Charges (Training Levy, Stamp duty & IPCHF)
                 $charges = App\Charge::all();
                 foreach($charges as $charge) {
                     $product->charges()->attach($charge);
