@@ -163,28 +163,6 @@ class ProductSeeder extends Seeder
             ]
         ];
 
-        // All products have these charges
-        $charges = [
-            [
-                "name" => 'training_levy',
-                "value" => 0.20,
-                "is_active" => true,
-                "is_percentage" => true
-            ],
-            [
-                "name" => 'IPCHF',
-                "value" => 0.25,
-                "is_active" => true,
-                "is_percentage" => true
-            ],
-            [
-                "name" => 'stamp_duty',
-                "value" => 40,
-                "is_active" => true,
-                "is_percentage" => false
-            ]
-        ];
-
         foreach ($insurers as $in) {
             // Insurer
             $insurer = new App\Insurer;
