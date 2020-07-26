@@ -21,7 +21,7 @@ class Product extends Model
     public function charges()
     {
         # code...
-        return $this->hasMany(Charge::class, 'product_charges');
+        return $this->belongsToMany(Charge::class, 'product_charges', 'product_id', 'charge_id');
         
     }
 

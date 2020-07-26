@@ -191,6 +191,12 @@ class ProductSeeder extends Seeder
 
                 $product->save();
 
+                // All charges (Training Levy, Stamp duty & IPCHF)
+                $charges = App\Charge::all();
+                foreach($charges as $charge) {
+                    $product->charges()->attach($charge);
+                }
+
                 $tariffs = $prod["tariffs"];
                 foreach ($tariffs as $tariff) {
                     $product->tariffs()->attach(App\Tariff::firstOrCreate($tariff));
