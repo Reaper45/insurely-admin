@@ -30,8 +30,8 @@ class ApiController extends Controller
                 if ($tariff->is_percentage) {
                     $total += ($sumInsured * ($tariff->value / 100));
                     break;
-                }
-                $total += $sumInsured * $tariff->value;
+                } else
+                $total += $tariff->value;
                 break;
             }   
             $total += $tariff->value;
@@ -84,27 +84,34 @@ class ApiController extends Controller
 
                 // Tariff totals
                 $product_tariffs_totals = $this->sumTariffs($product_tariffs, $sumInsured);
-                $benefits_tariffs_totals = $this->sumTariffs($benefits_tariffs, $sumInsured);
+                // $benefits_tariffs_totals = $this->sumTariffs($benefits_tariffs, $sumInsured);
 
                 // Charge totals
-                $product_charges_totals = $this->sumTariffs($product_charges, $sumInsured);
-                $benefits_charges_totals = $this->sumTariffs($benefits_charges, $sumInsured);
+                $charges = [];
+                foreach($product_charges as $product_charge) {
+                    array_push($charges, [
+                        "id" => $product_charge->id,
+                        "name" => $product_charge->name,
+                        "value" => $product_charge->is_percentage ? ($product_charge->value / 100) * $sumInsured : $product_charge->value
+                    ]);
+                }
+                // $benefits_charges_totals = $this->sumTariffs($benefits_charges, $sumInsured);
                 
                 // Product & Benefit totals
-                $product_totals = $product_tariffs_totals + $product_charges_totals;
-                $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
-
-                // dd($product_tariffs_totals, $product_charges_totals);
+                // $product_totals = $product_tariffs_totals + $product_charges_totals;
+                // $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
 
                 array_push($quoteArr, [
-                    'premium' => $product_totals,
-                    'benefits_totals' => $benefits_totals,
+                    'premium' => $product_tariffs_totals,
+                    'charges' => $charges,
                     'sum_insured' => $sumInsured,
-                    // "has_ipf" => $product->has_ipf,
                     "product_id" => $product->id,
                     "name" => $product->name,
                     "insurer" => $product->insurer,
                     "benefits" => $product->benefits,
+                    "optional_benefits" => $product->benefits,
+                    // "has_ipf" => $product->has_ipf,
+                    // 'benefits_totals' => $benefits_totals,
                 ]);
             }
 
