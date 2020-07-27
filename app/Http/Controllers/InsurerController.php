@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Traits\HandlesFile;
+use App\Insurer;
 use Illuminate\Http\Request;
 
 class InsurerController extends Controller
 {
+    use HandlesFile;
+
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['logo']);
     }
     /**
      * Display a listing of the resource.
@@ -85,5 +89,13 @@ class InsurerController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function logo($id)
+    {
+        # code...
+        $insurer = Insurer::find($id);
+        // dd($insurer);
+        return response($this->getFile('public', $insurer->logo), 200);
     }
 }

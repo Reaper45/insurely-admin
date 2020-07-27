@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
             [
                 "name" => "Sanlam Insurance",
                 "email" => "info@sanlam.co.ke",
-                "logo" => "",
+                "logo" => "sanlaam.jpg",
                 "telephone" => "0700100200",
                 "is_active" => true,
                 "products" => [
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
             [
                 "name" => "First Assurance Company Limited",
                 "email" => "hoinfo@firstassurance.co.ke",
-                "logo" => "",
+                "logo" => "first-assurance.jpg",
                 "telephone" => "0202900000",
                 "is_active" => true,
                 "products" => [
@@ -168,7 +168,7 @@ class ProductSeeder extends Seeder
             $insurer = new App\Insurer;
             $insurer->name = $in["name"];
             $insurer->email = $in["email"];
-            // $insurer->logo = "";
+            $insurer->logo = $in["logo"];
             $insurer->telephone = $in["telephone"];
             $insurer->is_active = true;
 
