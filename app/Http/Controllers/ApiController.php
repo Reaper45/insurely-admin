@@ -81,7 +81,7 @@ class ApiController extends Controller
                 $optional_benefits  = $optional_benefits_class->products->load('tariffs');
 
                 foreach($product->benefits as $product_benefit) {
-                    $product_benefit->with('charges', 'tariffs');
+                    $product_benefit->with('tariffs');
                     if(!$product_benefit->is_optional) {
                         array_push($benefits_charges, ...$product_benefit->charges);
                         array_push($benefits_tariffs, ...$product_benefit->tariffs);
@@ -108,7 +108,7 @@ class ApiController extends Controller
                     "product_id" => $product->id,
                     "name" => $product->name,
                     "insurer" => $product->insurer,
-                    "benefits" => $product->benefits,
+                    "benefits" => $product->benefits->load('tariffs'),
                     "optional_benefits" => $optional_benefits,
                     "has_ipf" => $product->has_ipf,
                 ]);
