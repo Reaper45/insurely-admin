@@ -43,4 +43,7 @@ Route::prefix('v1')->group(function (){
 
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');
+
+    Route::post('/transaction',  'ApiController@checkTransaction');
+
 });

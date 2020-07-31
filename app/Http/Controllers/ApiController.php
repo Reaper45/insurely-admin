@@ -12,7 +12,6 @@ use App\MFADetails;
 use App\Utils\SMS;
 use Illuminate\Support\Facades\Log;
 use App\Mail\Quote;
-use App\Product;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
@@ -234,39 +233,49 @@ class ApiController extends Controller
     // }
 
     // 2. Canceled
-    
-
 
     public function mpesaCallback(Request $request)
     {
         $body = $request->input('Body');
         $stkCallback = $body["stkCallback"];
-        $metaData = $stkCallback["CallbackMetadata"]["Item"];
 
-        $transaction = [
-            "description" => $stkCallback["ResultDesc"],
-            "merchant_request_id" => $stkCallback["MerchantRequestID"],
-            "checkout_request_id" => $stkCallback["CheckoutRequestID"],
-            "result_code" => $stkCallback["ResultCode"],
-        ];
+        if(array_key_exists("CallbackMetadata", $stkCallback)){
+            $metaData = $stkCallback["CallbackMetadata"]["Item"];
+            $transaction = [
+                "description" => $stkCallback["ResultDesc"],
+                "merchant_request_id" => $stkCallback["MerchantRequestID"],
+                "checkout_request_id" => $stkCallback["CheckoutRequestID"],
+                "result_code" => $stkCallback["ResultCode"],
+            ];
 
-        foreach($metaData as $item) {
-            if($item["Name"] == "Amount") {
-                $transaction["amount"] = $item["Value"];
+            foreach($metaData as $item) {
+                if($item["Name"] == "Amount") {
+                    $transaction["amount"] = $item["Value"];
+                }
+                elseif($item["Name"] == "PhoneNumber") {
+                    $transaction["phone_number"] = $item["Value"];
+                }
+                elseif($item["Name"] == "MpesaReceiptNumber") {
+                    $transaction["mpesa_code"] = $item["Value"];
+                }
+                elseif($item["Name"] == "TransactionDate") {
+                    $transaction["transaction_time"] = $item["Value"];
+                }
             }
-            elseif($item["Name"] == "PhoneNumber") {
-                $transaction["phone_number"] = $item["Value"];
-            }
-            elseif($item["Name"] == "MpesaReceiptNumber") {
-                $transaction["mpesa_code"] = $item["Value"];
-            }
-            elseif($item["Name"] == "TransactionDate") {
-                $transaction["transaction_time"] = $item["Value"];
-            }
-        }
-        DB::table("transactions")->insert([
-        ]);
-        
+            DB::table("transactions")->insert($transaction);
+        }        
         return response(200);
+    }
+
+    public function checkTransaction(Request $request)
+    {
+        $checkout_id = $request->input('checkout_id');
+        $phone_number = $request->input('phone_number');
+
+        $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("checkout_request_id", $checkout_id)->exists();
+        
+        $message = $transaction ? "Payment received" : "Payment not yet received";
+
+        return response($this->api_response($transaction, ["received" => $transaction], $message), 200);
     }
 }

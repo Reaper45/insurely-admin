@@ -260,7 +260,6 @@ class ProductSeeder extends Seeder
                 // Benefits
                 $benefits = $prod["benefits"];
                 foreach ($benefits as $benefit) {
-                    // if()
                     $created_benefit = App\Benefit::firstOrCreate($benefit[0], $benefit[1]);
 
                     if(array_key_exists(2, $benefit)) {

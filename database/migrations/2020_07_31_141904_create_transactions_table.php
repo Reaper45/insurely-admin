@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateTransactionsTable extends Migration
 {
@@ -22,8 +23,8 @@ class CreateTransactionsTable extends Migration
             $table->string('merchant_request_id');
             $table->string('checkout_request_id');
             $table->string('result_code');
-            $table->timestamp('transaction_time');
-            $table->timestamps();
+            $table->string('transaction_time');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
