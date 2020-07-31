@@ -14,7 +14,7 @@ class InsuranceClassSeeder extends Seeder
         // Motor Insurance classes
         $parent = App\InsuranceClass::create([
             "name" => "Motor Private",
-            "value" => "600"
+            "value" =>  env("MOTOR_PRIVATE", "600")
         ]);
         $parent->children()->saveMany([
             new App\InsuranceClass([
@@ -34,5 +34,12 @@ class InsuranceClassSeeder extends Seeder
                 "value" => "604"
             ]),
         ]);
+
+        // Optional Benefits class [hack]
+        $optional_benefit = new App\InsuranceClass([
+            "name" => "Optional benefits",
+            "value" =>  env("OPTIONAL_BENEFITS", "000")
+        ]);
+        $optional_benefit->save();
     }
 }	

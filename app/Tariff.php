@@ -10,7 +10,7 @@ class Tariff extends Model
     public function benefits()
     {
         # code...
-        return $this->belongsToMany(Benefit::class, 'benefit_tariffs', 'tariff_id', 'benefit_id');
+        return $this->hasMany(Benefit::class, 'benefit_tariffs', 'tariff_id', 'benefit_id');
     }
 
 }

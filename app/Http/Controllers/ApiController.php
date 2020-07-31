@@ -8,10 +8,12 @@ use Illuminate\Support\Str;
 use App\Category;
 use App\Http\Controllers\Traits\ControllerHelpers;
 use App\InsuranceClass;
-use App\User;
 use App\MFADetails;
 use App\Utils\SMS;
 use Illuminate\Support\Facades\Log;
+use App\Mail\Quote;
+use App\Product;
+use Illuminate\Support\Facades\Mail;
 
 class ApiController extends Controller
 {
@@ -74,17 +76,20 @@ class ApiController extends Controller
                 $benefits_charges = [];
                 $benefits_tariffs = [];
 
+                // Includes 000 (class) products
+                $optional_benefits_class = InsuranceClass::where("value", env("OPTIONAL_BENEFITS", "000"))->first();
+                $optional_benefits  = $optional_benefits_class->products->load('tariffs');
+
                 foreach($product->benefits as $product_benefit) {
-                    $product_benefit->with('charges');
-                    array_push($benefits_charges, ...$product_benefit->charges);
-                    array_push($benefits_tariffs, ...$product_benefit->tariffs);
+                    $product_benefit->with('charges', 'tariffs');
+                    if(!$product_benefit->is_optional) {
+                        array_push($benefits_charges, ...$product_benefit->charges);
+                        array_push($benefits_tariffs, ...$product_benefit->tariffs);
+                    }
                 }
-                // $benefits_charges = $product->benefits->charges;
-                // $benefits_tariffs = $product->benefits->tariffs;
 
                 // Tariff totals
                 $product_tariffs_totals = $this->sumTariffs($product_tariffs, $sumInsured);
-                // $benefits_tariffs_totals = $this->sumTariffs($benefits_tariffs, $sumInsured);
 
                 // Charge totals
                 $charges = [];
@@ -95,11 +100,6 @@ class ApiController extends Controller
                         "value" => $product_charge->is_percentage ? ($product_charge->value / 100) * $sumInsured : $product_charge->value
                     ]);
                 }
-                // $benefits_charges_totals = $this->sumTariffs($benefits_charges, $sumInsured);
-                
-                // Product & Benefit totals
-                // $product_totals = $product_tariffs_totals + $product_charges_totals;
-                // $benefits_totals = $benefits_tariffs_totals + $benefits_charges_totals;
 
                 array_push($quoteArr, [
                     'premium' => $product_tariffs_totals,
@@ -109,9 +109,8 @@ class ApiController extends Controller
                     "name" => $product->name,
                     "insurer" => $product->insurer,
                     "benefits" => $product->benefits,
-                    "optional_benefits" => $product->benefits,
-                    // "has_ipf" => $product->has_ipf,
-                    // 'benefits_totals' => $benefits_totals,
+                    "optional_benefits" => $optional_benefits,
+                    "has_ipf" => $product->has_ipf,
                 ]);
             }
 
@@ -120,9 +119,16 @@ class ApiController extends Controller
         return response($this->api_response(true, null, "No products were found"), 200);
     }
     
-    public function sendEmail()
+    public function sendEmail(Request $request)
     {
 
+        $quote = $request->input('quote');
+        Mail::to('jomwashighadi@gmail.com')->queue(new Quote($quote));
+        // Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message) {
+		//     $message->to('jomwashighadi@gmail.com');
+        // });
+        
+        return response($this->api_response(true, null, "Request completed"), 200);
     }
 
     public function sendOtp(Request $request)
@@ -141,7 +147,7 @@ class ApiController extends Controller
         
         $mfa_details->save();
 
-        $message = "Hey, your OTP is ${otp}";
+        $message = "${otp} is Insurely verification code.";
 
         // Send out token
         SMS::sendSMS($phoneNumber, $message);

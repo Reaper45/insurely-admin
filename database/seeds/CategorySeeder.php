@@ -13,31 +13,36 @@ class CategorySeeder extends Seeder
     public function run()
     {
         //
-        $insuranceClass = App\InsuranceClass::where("value", "600")->first();
+        $insuranceClass = App\InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
         $insuranceClass->categories()->saveMany([
             new App\Category([
                 'name'=>'Comprehensive',
-                'code' => 'COMP',
+                'code' =>  env("MOTOR_PRIVATE_COMP", "COMP"),
             ]),
             new App\Category([
                 'name'=>'Third Party Fire & Theft (TPFT)',
-                'code' => 'TPFT',
+                'code' => env("MOTOR_PRIVATE_TPFT", "TPFT"),
             ]),
             new App\Category([
                 'name'=>'Third Party Only (TPO)',
-                'code' => 'TPO',
+                'code' => env("MOTOR_PRIVATE_TPO", "TPO"),
             ]),
+        ]);
+
+        // 
+        $optionalBenefitsClass = App\InsuranceClass::where("value", env("OPTIONAL_BENEFITS", "000"))->first();
+        $optionalBenefitsClass->categories()->saveMany([
             new App\Category([
                 'name'=>'Road Rescue',
-                'code' => 'REC',
+                'code' => env("ROAD_RESCUE", "REC"),
             ]),
             new App\Category([
                 'name'=>'Medical Evacuation',
-                'code' => 'MED',
+                'code' => env("MEDICAL_EVAC", "MED"),
             ]),
             new App\Category([
                 'name'=>'Security',
-                'code' => 'SEC',
+                'code' => env("SECURITY", "SEC"),
             ]),
         ]);
     }
