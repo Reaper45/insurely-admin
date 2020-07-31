@@ -41,4 +41,6 @@ Route::prefix('v1')->group(function (){
 
     Route::post('/send/quote', 'ApiController@sendEmail');
 
+    // Payments
+    Route::post('/callback',  'ApiController@mpesaCallback');
 });

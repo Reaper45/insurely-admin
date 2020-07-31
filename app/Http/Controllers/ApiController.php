@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Mail\Quote;
 use App\Product;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -124,9 +125,6 @@ class ApiController extends Controller
 
         $quote = $request->input('quote');
         Mail::to('jomwashighadi@gmail.com')->queue(new Quote($quote));
-        // Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message) {
-		//     $message->to('jomwashighadi@gmail.com');
-        // });
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }
@@ -195,5 +193,80 @@ class ApiController extends Controller
     {
         $categories = Category::where("insurance_class_id", $class_id)->get();
         return response($this->api_response(true, ["categories" => $categories], null), 200);
+    }
+
+
+    // Callback request object
+
+    // 1. Payed
+    // {
+    //     "Body": {
+    //         "stkCallback": {
+    //             "MerchantRequestID": "15589-12770168-1",
+    //             "CheckoutRequestID": "ws_CO_310720201721218155",
+    //             "ResultCode": 0,
+    //             "ResultDesc": "The service request is processed successfully.",
+    //             "CallbackMetadata": {
+    //                 "Item": [
+    //                     {
+    //                         "Name": "Amount",
+    //                         "Value": 5
+    //                     },
+    //                     {
+    //                         "Name": "MpesaReceiptNumber",
+    //                         "Value": "OGV47XWKFM"
+    //                     },
+    //                     {
+    //                         "Name": "Balance"
+    //                     },
+    //                     {
+    //                         "Name": "TransactionDate",
+    //                         "Value": 20200731172133
+    //                     },
+    //                     {
+    //                         "Name": "PhoneNumber",
+    //                         "Value": 254719747908
+    //                     }
+    //                 ]
+    //             }
+    //         }
+    //     }
+    // }
+
+    // 2. Canceled
+    
+
+
+    public function mpesaCallback(Request $request)
+    {
+        $body = $request->input('Body');
+        $stkCallback = $body["stkCallback"];
+        $metaData = $stkCallback["CallbackMetadata"]["Item"];
+
+        $transaction = [
+            "description" => $stkCallback["ResultDesc"],
+            "merchant_request_id" => $stkCallback["MerchantRequestID"],
+            "checkout_request_id" => $stkCallback["CheckoutRequestID"],
+            "result_code" => $stkCallback["ResultCode"],
+        ];
+
+        foreach($metaData as $item) {
+            if($item["Name"] == "Amount") {
+                $transaction["amount"] = $item["Value"];
+            }
+            elseif($item["Name"] == "PhoneNumber") {
+                $transaction["phone_number"] = $item["Value"];
+            }
+            elseif($item["Name"] == "MpesaReceiptNumber") {
+                $transaction["mpesa_code"] = $item["Value"];
+            }
+            elseif($item["Name"] == "TransactionDate") {
+                $transaction["transaction_time"] = $item["Value"];
+            }
+        }
+        DB::table("transactions")->insert([
+        ]);
+        
+        return response(200);
     }
 }
