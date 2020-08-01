@@ -37,9 +37,9 @@ Route::prefix('v1')->group(function (){
     // Class categories
     Route::get('/classes/{class_id}/categories', 'ApiController@getCategories');
 
-    Route::get('/insurer/{id}/logo/', 'InsurerController@logo');
+    Route::get('/insurer/{id}/logo/', 'InsurerController@logo')->name("api.avatar");
 
-    Route::post('/send/quote', 'ApiController@sendEmail');
+    Route::post('/send/quote', 'ApiController@sendQuoteEmail');
 
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');

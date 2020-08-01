@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Category;
 use App\Http\Controllers\Traits\ControllerHelpers;
 use App\InsuranceClass;
+use App\Mail\Payment;
 use App\MFADetails;
 use App\Utils\SMS;
 use Illuminate\Support\Facades\Log;
@@ -119,10 +120,19 @@ class ApiController extends Controller
         return response($this->api_response(true, null, "No products were found"), 200);
     }
     
-    public function sendEmail(Request $request)
+    public function sendPaymentEmail(Request $request)
+    {
+        // $payment = $request->input('to');
+        // Mail::to($to)->queue(new Payment($payment));
+        
+        return response($this->api_response(true, null, "Request completed"), 200);
+    }
+
+    public function sendQuoteEmail(Request $request)
     {
         $quote = $request->input('quote');
-        Mail::to('jomwashighadi@gmail.com')->queue(new Quote($quote));
+        $to = $request->input('to');
+        Mail::to($to)->queue(new Quote($quote));
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }

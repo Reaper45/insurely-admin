@@ -25,7 +25,7 @@
             <div style="width: 100%; margin: 0 auto; padding: 2rem; box-sizing: border-box;">
                 <div style="border: solid 1px #e2e8f0; border-radius: 8px;">
                     <div style="border-bottom: solid 1px #e2e8f0; padding: 1rem 1.5rem;">
-                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;">Vehicle Insurance Quotaion</div>
+                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;">Payment Confirmation</div>
                         <div style="color: #2A4365; opacity: .66; font-weight: 500; align-items: center;">
                             <img style="height: 14px; margin-right: .5rem; vertical-align: middle;" src="{{ asset('icons/clock.png') }}" />
                             {{ Carbon\Carbon::now()->format('l jS F Y, h:i:s A')}}
@@ -84,12 +84,8 @@
                         </a>
                     </div>
                     <div style="text-align: center;">
-                        <small> 254721276411 &bull; 254738727774</small>
-                        <br />
-                        <small><a style="color: #114AAF; text-decoration: underline;" href="mailto:hello@insurely.cc">hello@insurely.cc</a></small>
-                        <br />
                         <small>
-                            &copy; 2020 - All Rights Reserved.
+                                &copy; 2020 - All Rights Reserved.
                         </small>
                     </div>
                 </div>

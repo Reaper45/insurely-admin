@@ -7,19 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Quote extends Mailable
+class Payment extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $quote;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($quote)
+    public function __construct()
     {
-        $this->quote = $quote;
+        //
     }
 
     /**
@@ -29,9 +28,6 @@ class Quote extends Mailable
      */
     public function build()
     {
-
-        return $this->from("noreply@insurely.cc", "Insurely ltd. ")
-                    ->subject($this->quote["name"])
-                    ->view('emails.quote')->with(['quote'=>$this->quote]);
+        return $this->view('view.name');
     }
 }

@@ -43,7 +43,7 @@ Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('se
 
 Route::get('/email', function() {
   $quote = [
-    "premium" => 40000
+    "premium" => 40000,
   ];
   return view('emails.quote')->with(["quote"=> $quote]);
 });
