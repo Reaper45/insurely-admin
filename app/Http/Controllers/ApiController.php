@@ -121,7 +121,6 @@ class ApiController extends Controller
     
     public function sendEmail(Request $request)
     {
-
         $quote = $request->input('quote');
         Mail::to('jomwashighadi@gmail.com')->queue(new Quote($quote));
         
@@ -194,46 +193,6 @@ class ApiController extends Controller
         return response($this->api_response(true, ["categories" => $categories], null), 200);
     }
 
-
-    // Callback request object
-
-    // 1. Payed
-    // {
-    //     "Body": {
-    //         "stkCallback": {
-    //             "MerchantRequestID": "15589-12770168-1",
-    //             "CheckoutRequestID": "ws_CO_310720201721218155",
-    //             "ResultCode": 0,
-    //             "ResultDesc": "The service request is processed successfully.",
-    //             "CallbackMetadata": {
-    //                 "Item": [
-    //                     {
-    //                         "Name": "Amount",
-    //                         "Value": 5
-    //                     },
-    //                     {
-    //                         "Name": "MpesaReceiptNumber",
-    //                         "Value": "OGV47XWKFM"
-    //                     },
-    //                     {
-    //                         "Name": "Balance"
-    //                     },
-    //                     {
-    //                         "Name": "TransactionDate",
-    //                         "Value": 20200731172133
-    //                     },
-    //                     {
-    //                         "Name": "PhoneNumber",
-    //                         "Value": 254719747908
-    //                     }
-    //                 ]
-    //             }
-    //         }
-    //     }
-    // }
-
-    // 2. Canceled
-
     public function mpesaCallback(Request $request)
     {
         $body = $request->input('Body');
@@ -269,10 +228,10 @@ class ApiController extends Controller
 
     public function checkTransaction(Request $request)
     {
-        $checkout_id = $request->input('checkout_id');
+        $amount = $request->input('amount');
         $phone_number = $request->input('phone_number');
 
-        $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("checkout_request_id", $checkout_id)->exists();
+        $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("amount", $amount)->exists();
         
         $message = $transaction ? "Payment received" : "Payment not yet received";
 

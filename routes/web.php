@@ -34,8 +34,16 @@ Route::get('/insurers/edit/{id}', 'InsurerController@edit')->name('insurers.edit
 Route::put('/insurers/edit', 'InsurerController@update')->name('insurers.update');
 
 // Settings
-Route::get('settings/', 'SettingController@index')->name('settings');
+Route::get('/settings', 'SettingController@index')->name('settings');
   
-Route::get('settings/benefits', 'SettingController@benefits')->name('settings.benefits');
+Route::get('/settings/benefits', 'SettingController@benefits')->name('settings.benefits');
 
-Route::get('settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
+Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
+
+
+Route::get('/email', function() {
+  $quote = [
+    "premium" => 40000
+  ];
+  return view('emails.quote')->with(["quote"=> $quote]);
+});
