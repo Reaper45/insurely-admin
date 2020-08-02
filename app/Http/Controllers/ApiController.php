@@ -199,7 +199,9 @@ class ApiController extends Controller
 
     public function getCategories($class_id)
     {
-        $categories = Category::where("insurance_class_id", $class_id)->get();
+        // Return categories including REC, MED & SEC
+        // $class_id -> for later use
+        $categories = Category::all();
         return response($this->api_response(true, ["categories" => $categories], null), 200);
     }
 
