@@ -198,7 +198,7 @@ class ProductSeeder extends Seeder
             [
                 "name" => "AA Kenya",
                 "email" => "aak@aakenya.co.ke",
-                "logo" => "aa.jpg",
+                "logo" => "aa.png",
                 "telephone" => "0709 933 000",
                 "is_active" => true,
                 "products" => [
