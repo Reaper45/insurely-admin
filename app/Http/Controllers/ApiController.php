@@ -122,8 +122,14 @@ class ApiController extends Controller
     
     public function sendPaymentEmail(Request $request)
     {
-        // $payment = $request->input('to');
-        // Mail::to($to)->queue(new Payment($payment));
+        $to = $request->input('to'); // <- Email address
+        $customer_name = $request->input('customer_name'); // <- Customer's first name 
+        $transaction_id = $request->input('transaction_id');
+        $quote = $request->input('quote');
+
+        $payment = DB::table("transactions")->find($transaction_id);
+
+        Mail::to($to)->queue(new Payment($payment, $quote, $customer_name));
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }

@@ -21,16 +21,27 @@
             </table>
             </div>
         </div>
+        
         <div style="background: #fff; margin: 0 auto; width: 90%; max-width: 700px; box-sizing: border-box; border-radius: 8px;">
+
             <div style="width: 100%; margin: 0 auto; padding: 2rem; box-sizing: border-box;">
                 <div style="border: solid 1px #e2e8f0; border-radius: 8px;">
                     <div style="border-bottom: solid 1px #e2e8f0; padding: 1rem 1.5rem;">
-                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;">Payment Confirmation</div>
+                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;"><b style=" text-transform: uppercase;">{{ $payment["mpesa_code"] }} Confirmed</b></div>
                         <div style="color: #2A4365; opacity: .66; font-weight: 500; align-items: center;">
                             <img style="height: 14px; margin-right: .5rem; vertical-align: middle;" src="{{ asset('icons/clock.png') }}" />
                             {{ Carbon\Carbon::now()->format('l jS F Y, h:i:s A')}}
                         </div>
                     </div>
+                    <div style="line-height: 1.6; color: #2A4365; padding: 1rem 1.5rem; border-bottom: solid 1px #e2e8f0;">
+                        Hi {{ $name }},
+                        <br />
+                        <br />
+                        Just to let you know — you just said yes to a perfect cover!
+                        We are processing your order and we will give you an update as soon as possible.
+                        <br />
+                    </div>
+                
                     <table style="width: 100%; border-collapse: collapse;">
                         <tbody>
                             <tr>
@@ -42,32 +53,19 @@
                                     <br />
                                     <small style="opacity: .66; display: block; margin-top: 5px;">{{$quote["insurer"]["name"] }}</small>
                                 </td>
+                                <td style="background: #f9fafc; padding: 1rem 0 1rem 1.5rem;">1</td>
                                 <td  style="background: #f9fafc; padding: 1rem 1.5rem 1rem 0; text-align: right;">
                                     <span style="padding: 6px 10px; background: #e1f6e9; color: #3bbd65; border-radius: 1rem; font-size: 14px; font-weight: 500;">
-                                        KES. {{ $quote["premium"] }}
+                                        KES. {{ number_format($payment["amount"]) }}
                                     </span>
                                 </td>
                             </tr>
-                            @foreach ($quote["charges"] as $charge)
-                                <tr>
-                                    <td style="color: #2A4365; padding: 6px 0 6px 1.5rem;" colSpan="2">
-                                        <small>{{ $charge["name"] }}</small>
-                                    </td>
-                                    <td style="color: #2A4365; text-align: right; padding: 6px 1.5rem 6px 0;">
-                                        <small>{{ $charge["value"] }}</small>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            <tr style="font-size: smaller;">
-                                <td style="color: #2A4365; padding: 1rem 0 1rem 1.5rem;" colSpan="2">
-                                    <b>Your total </b>
-                                </td>
-                                <td style="color: #2A4365; text-align: right; padding: 1rem 1.5rem 1rem 0;">
-                                    <b>KES. {{ $quote["premium"] }}</b>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
+                    <div style="border-top: solid 1px #e2e8f0; color: #2A4365; padding: 1.5rem; ">
+                        Thank you for choosing Insurely!
+                    </div>
                 </div>
             </div>
             <div style="padding: 2rem; background: #f9fafc; color: #2A4365;">

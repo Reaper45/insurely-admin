@@ -42,8 +42,13 @@ Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('se
 
 
 Route::get('/email', function() {
-  $quote = [
-    "premium" => 40000,
+  $payment = [
+    "amount" => 40000,
+    "mpesa_code" => "0hr2zqeb81",
   ];
-  return view('emails.quote')->with(["quote"=> $quote]);
+  $quote = [
+    "insurer" => [ "name" => "Sanlam Insurance", "id" => "1"],
+    "name" => "Sanlam Comprehensive Cover",
+  ];
+  return view('emails.payment')->with(["quote"=> $quote, "payment"=> $payment, "name" => "Joram"]);
 });
