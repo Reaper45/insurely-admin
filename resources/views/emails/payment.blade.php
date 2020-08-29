@@ -27,7 +27,7 @@
             <div style="width: 100%; margin: 0 auto; padding: 2rem; box-sizing: border-box;">
                 <div style="border: solid 1px #e2e8f0; border-radius: 8px;">
                     <div style="border-bottom: solid 1px #e2e8f0; padding: 1rem 1.5rem;">
-                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;"><b style=" text-transform: uppercase;">{{ $payment["mpesa_code"] }} Confirmed</b></div>
+                        <div style="color: #2A4365; margin-bottom: .5rem; font-weight: 700; font-size: large;"><b style=" text-transform: uppercase;">{{ $payment->mpesa_code }} Confirmed</b></div>
                         <div style="color: #2A4365; opacity: .66; font-weight: 500; align-items: center;">
                             <img style="height: 14px; margin-right: .5rem; vertical-align: middle;" src="{{ asset('icons/clock.png') }}" />
                             {{ Carbon\Carbon::now()->format('l jS F Y, h:i:s A')}}
@@ -56,7 +56,7 @@
                                 <td style="background: #f9fafc; padding: 1rem 0 1rem 1.5rem;">1</td>
                                 <td  style="background: #f9fafc; padding: 1rem 1.5rem 1rem 0; text-align: right;">
                                     <span style="padding: 6px 10px; background: #e1f6e9; color: #3bbd65; border-radius: 1rem; font-size: 14px; font-weight: 500;">
-                                        KES. {{ number_format($payment["amount"]) }}
+                                        KES. {{ number_format($payment->amount) }}
                                     </span>
                                 </td>
                             </tr>

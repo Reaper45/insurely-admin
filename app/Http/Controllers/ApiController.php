@@ -126,10 +126,9 @@ class ApiController extends Controller
         $customer_name = $request->input('customer_name'); // <- Customer's first name 
         $transaction_id = $request->input('transaction_id');
         $quote = $request->input('quote');
-
         $payment = DB::table("transactions")->find($transaction_id);
 
-        Mail::to($to)->queue(new Payment($payment, $quote, $customer_name));
+        Mail::to($to)->queue(new Payment($payment, (array)$quote, $customer_name));
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }
@@ -240,7 +239,7 @@ class ApiController extends Controller
                 }
             }
             DB::table("transactions")->insert($transaction);
-        }        
+        }
         return response(200);
     }
 
@@ -249,10 +248,10 @@ class ApiController extends Controller
         $amount = $request->input('amount');
         $phone_number = $request->input('phone_number');
 
-        $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("amount", $amount)->exists();
+        $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("amount", $amount)->first();
         
         $message = $transaction ? "Payment received" : "Payment not yet received";
 
-        return response($this->api_response($transaction, ["received" => $transaction], $message), 200);
+        return response($this->api_response((bool)$transaction, ["received" => (bool)$transaction, "transaction" => $transaction], $message), 200);
     }
 }

@@ -39,11 +39,13 @@ Route::prefix('v1')->group(function (){
 
     Route::get('/insurer/{id}/logo/', 'InsurerController@logo')->name("api.avatar");
 
-    Route::post('/send/quote', 'ApiController@sendQuoteEmail');
-
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');
 
     Route::post('/transaction',  'ApiController@checkTransaction');
+
+    Route::post('/email/quote', 'ApiController@sendQuoteEmail');
+
+    Route::post('/email/payment', 'ApiController@sendPaymentEmail');
 
 });
