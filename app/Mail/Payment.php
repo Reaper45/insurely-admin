@@ -14,17 +14,17 @@ class Payment extends Mailable
 
     public $quote;
 
-    public $customer_name;
+    public $customer;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($payment_details, $quote, $customer_name)
+    public function __construct($payment_details, $quote, $customer)
     {
         $this->payment_details = $payment_details;
         $this->quote = $quote;
-        $this->customer_name = $customer_name;
+        $this->customer= $customer;
     }
 
     /**
@@ -34,12 +34,12 @@ class Payment extends Mailable
      */
     public function build()
     {
-        return $this->from("recieved@insurely.cc", "Insurely ltd. ")
-                    ->subject("Payment Received")
+        return $this->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"))
+                    ->subject($this->payment_details->mpesa_code." - Payment Received")
                     ->view("emails.payment")->with([
                         "payment" => $this->payment_details,
                         "quote" => $this->quote,
-                        "name" => $this->customer_name
+                        "name" => $this->customer["name"]
                     ]);
     }
 }

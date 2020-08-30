@@ -136,7 +136,7 @@ class ApiController extends Controller
         $payment = DB::table("transactions")->find($transaction_id);
 
         // Send payment confirmation email to customer
-        Mail::to($customer["email"])->queue(new Payment($payment, (array)$quote, $customer["name"]));
+        Mail::to($customer["email"])->queue(new Payment($payment, (array)$quote, $customer));
 
         // Send the order details to insurely admin
         $file_name = $customer["name"].'.xlsx';

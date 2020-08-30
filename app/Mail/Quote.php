@@ -29,7 +29,7 @@ class Quote extends Mailable
     public function build()
     {
 
-        return $this->from("noreply@insurely.cc", "Insurely ltd. ")
+        return $this->from(env("MAIL_FROM_ADDRESS"), env("MAIL_FROM_NAME"))
                     ->subject($this->quote["name"])
                     ->view('emails.quote')
                     ->with(['quote' => $this->quote]);
