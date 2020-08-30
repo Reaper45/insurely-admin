@@ -1,5 +1,5 @@
 
-    <div style="padding: 0; margin: 0; font-weight: 100; height: 100vh; font-family: Helvetica, sans-serif; font-size: 14px; background-color: #f0f5f8; background: #f0f5f8;">
+    <div style="padding: 0; margin: 0; font-weight: 100; padding: 0 2rem 4rem; font-family: Helvetica, sans-serif; font-size: 14px; background-color: #f0f5f8; background: #f0f5f8;">
         <div style="width: 100%;">
             <div style="margin: 0 auto; width: 90%; max-width: 700px; padding: 0 1rem;">
             <table style="width: 100%;">

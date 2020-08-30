@@ -31,6 +31,7 @@ class Quote extends Mailable
 
         return $this->from("noreply@insurely.cc", "Insurely ltd. ")
                     ->subject($this->quote["name"])
-                    ->view('emails.quote')->with(['quote'=>$this->quote]);
+                    ->view('emails.quote')
+                    ->with(['quote' => $this->quote]);
     }
 }

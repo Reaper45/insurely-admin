@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Mail\Order;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,15 +45,9 @@ Route::get('/settings/benefits', 'SettingController@benefits')->name('settings.b
 
 Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
 
+Route::get('/test/excel', function(Request $request) {
+  $quote = $request->input('quote');
+  Excel::download(new OrderExport((object)$quote), 'test.xlsx'); 
 
-Route::get('/email', function() {
-  $payment = [
-    "amount" => 40000,
-    "mpesa_code" => "0hr2zqeb81",
-  ];
-  $quote = [
-    "insurer" => [ "name" => "Sanlam Insurance", "id" => "1"],
-    "name" => "Sanlam Comprehensive Cover",
-  ];
-  return view('emails.payment')->with(["quote"=> $quote, "payment"=> $payment, "name" => "Joram"]);
+  return response([], 200);
 });

@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Log;
 use App\Mail\Quote;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Exports\OrderExport;
+use App\Mail\Order;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ApiController extends Controller
 {
@@ -120,24 +124,51 @@ class ApiController extends Controller
         return response($this->api_response(true, null, "No products were found"), 200);
     }
     
+    /**
+     * Send payment confirmation email to customer & order details (.xsls) to Insurely
+     */
     public function sendPaymentEmail(Request $request)
     {
-        $to = $request->input('to'); // <- Email address
-        $customer_name = $request->input('customer_name'); // <- Customer's first name 
+        $customer = $request->input('customer');
         $transaction_id = $request->input('transaction_id');
         $quote = $request->input('quote');
+
         $payment = DB::table("transactions")->find($transaction_id);
 
-        Mail::to($to)->queue(new Payment($payment, (array)$quote, $customer_name));
+        // Send payment confirmation email to customer
+        Mail::to($customer["email"])->queue(new Payment($payment, (array)$quote, $customer["name"]));
+
+        // Send the order details to insurely admin
+        $file_name = $customer["name"].'.xlsx';
+        $file = Excel::download(new OrderExport($customer, $payment, $quote),  $file_name)->getFile(); 
+
+        $order_message = new Order($quote, $customer["name"],  $customer["email"]);
+        $order_message->attach($file, [
+            "as" => $file_name,
+            "mime" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ]);
+
+        Mail::to(env('ORDERS_EMAIL'))->send($order_message);
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }
 
+    /**
+     * Send quote to customer with pdf attachment 
+     */
     public function sendQuoteEmail(Request $request)
     {
         $quote = $request->input('quote');
         $to = $request->input('to');
-        Mail::to($to)->queue(new Quote($quote));
+
+        $pdf = PDF::loadView('exports.quote', $quote)->setPaper('a4');
+
+        $message = new Quote($quote);
+        $message->attachData($pdf->output(), $quote["name"].'.pdf', [
+            "mime" => "application/pdf"
+        ]);
+
+        Mail::to($to)->send($message);            
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }

@@ -3,6 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Exports\OrderExport;
+use App\Mail\Order;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,5 +52,25 @@ Route::prefix('v1')->group(function (){
     Route::post('/email/quote', 'ApiController@sendQuoteEmail');
 
     Route::post('/email/payment', 'ApiController@sendPaymentEmail');
+
+    // Route::post('/test/pdf', function(Request $request) {
+    //     $customer_name = $request->input('customer_name'); // <- Customer's first name 
+    //     $customer_email = $request->input('to'); // <- Email address
+    //     $quote = $request->input('quote');
+        
+    //     $order_message = new Order($quote, $customer_name, "info@insurely.cc");
+
+    //     $file_name = $quote["name"].'.xlsx';
+    //     $file = Excel::download(new OrderExport((object)$quote), $file_name)->getFile(); 
+
+    //     $order_message->attach($file, [
+    //         "as" => $file_name,
+    //         "mime" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    //     ]);
+
+    //     Mail::to($customer_email)->send($order_message);
+
+    //     return response([], 200);
+    // });
 
 });
