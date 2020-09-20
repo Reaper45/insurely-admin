@@ -35,7 +35,7 @@ class ApiController extends Controller
             if ($tariff->is_active) {
                 // is percentage
                 if ($tariff->is_percentage) {
-                    $total += ($sumInsured * ($tariff->value / 100));
+                    $total += ceil($sumInsured * ($tariff->value / 100));
                     break;
                 } else
                 $total += $tariff->value;
@@ -46,7 +46,7 @@ class ApiController extends Controller
         return $total;
     }
 
-    private function generateSMSOTP($length = 6)
+    private function generateSMSOTP($length = 4)
     {
         $allowedChars = '0123456789';
         $otp = '';
@@ -102,7 +102,7 @@ class ApiController extends Controller
                     array_push($charges, [
                         "id" => $product_charge->id,
                         "name" => $product_charge->name,
-                        "value" => $product_charge->is_percentage ? ($product_charge->value / 100) * $sumInsured : $product_charge->value
+                        "value" => $product_charge->is_percentage ? ceil(($product_charge->value / 100) * $sumInsured) : $product_charge->value
                     ]);
                 }
 
