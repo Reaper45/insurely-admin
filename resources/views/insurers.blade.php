@@ -77,7 +77,9 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            <x-insurer />
+                            @foreach ($insurers as $insurer)
+                                <x-insurer :insurer="$insurer" />
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

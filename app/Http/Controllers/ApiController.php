@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Exports\OrderExport;
 use App\Mail\Order;
+use App\Mail\Test;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApiController extends Controller

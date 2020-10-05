@@ -2,18 +2,20 @@
 
 namespace App\View\Components;
 
+use App\Insurer as AppInsurer;
 use Illuminate\View\Component;
 
 class Insurer extends Component
 {
+    public $insurer;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AppInsurer $insurer)
     {
-        //
+        $this->insurer = $insurer;
     }
 
     /**

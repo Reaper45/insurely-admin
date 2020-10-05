@@ -21,8 +21,9 @@ class InsurerController extends Controller
      */
     public function index()
     {
-        //
-        return view('insurers');
+        $insurers = Insurer::all();
+
+        return view('insurers')->with(["insurers" => $insurers]);
     }
 
     /**
