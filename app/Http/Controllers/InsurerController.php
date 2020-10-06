@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Traits\HandlesFile;
 use App\Insurer;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
+use Symfony\Component\Console\Input\Input;
 
 class InsurerController extends Controller
 {
@@ -33,7 +35,7 @@ class InsurerController extends Controller
      */
     public function create()
     {
-        //
+        return view('new-insurer');
     }
 
     /**
@@ -44,7 +46,28 @@ class InsurerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|unique:insurers|max:255',
+            'email' => 'required|email',
+            'logo' => 'required|image',
+            'phone_number' => 'required|digits_between:9,12',
+        ]);
+
+        $logo = $request->file('logo');
+
+        $fileName = Uuid::uuid4(). '.' . $logo->extension();
+        $logo->storeAs('public', $fileName);
+        
+        $insurer = new Insurer();
+
+        $insurer->name = $data["name"];
+        $insurer->email = $data["email"];
+        $insurer->telephone = $data["phone_number"];
+        $insurer->logo = $fileName;
+
+        $insurer->save();
+
+        return redirect("insurers");
     }
 
     /**

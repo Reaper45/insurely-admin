@@ -27,9 +27,11 @@ Route::put('/products/edit', 'ProductController@update')->name('products.update'
 // Insurer
 Route::get('/insurers', 'InsurerController@index')->name('insurers');
 
-Route::get('/insurer/{id}/logo/', 'InsurerController@logo')->name("insurers.avatar");
+Route::get('/insurers/{id}/logo/', 'InsurerController@logo')->name("insurers.avatar");
 
-Route::post('/insurers', 'InsurerController@store')->name('insurers.create');
+Route::get('/insurers/create', 'InsurerController@create')->name('insurers.create');
+
+Route::post('/insurers/create', 'InsurerController@store')->name('insurers.store');
 
 Route::get('/insurers/edit/{id}', 'InsurerController@edit')->name('insurers.edit');
 
