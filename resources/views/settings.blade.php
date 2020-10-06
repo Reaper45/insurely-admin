@@ -16,8 +16,8 @@
             {{-- <div class="border-t border-gray-200"></div> --}}
             <div class="py-1">
               <!-- classes list -->
-              @foreach ($insuranceClass as $item)
-                <a href="{{route('settings.class', ['class_id' => $item->id])}}" class="block px-4 py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">{{ $item->name}}</a>   
+              @foreach ($insuranceClasses as $item)
+                <a href="{{route('settings.class', ['class_id' => $item->id])}}" class="block px-4 py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">{{ $item->name }}</a>   
               @endforeach
             </div>
             <div class="border-t border-gray-200"></div>

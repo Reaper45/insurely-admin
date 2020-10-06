@@ -83,7 +83,7 @@ class ApiController extends Controller
                 $benefits_tariffs = [];
 
                 // Includes 000 (class) products
-                $optional_benefits_class = InsuranceClass::where("value", env("OPTIONAL_BENEFITS", "000"))->first();
+                $optional_benefits_class = InsuranceClass::where("value", env("EXTRAS", "000"))->first();
                 $optional_benefits  = $optional_benefits_class->products->load('tariffs');
 
                 foreach($product->benefits as $product_benefit) {

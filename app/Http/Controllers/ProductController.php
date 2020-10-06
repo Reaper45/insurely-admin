@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\InsuranceClass;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,7 +18,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+
+        $products = [];
+
+        foreach ($motorPrivate->children as $child) {
+            array_push($products, ...$child->products);
+        }
+
         return view('products')->with(["products" => $products]);
     }
 

@@ -206,7 +206,7 @@ class ProductSeeder extends Seeder
                         "name" => "Towing & recovery (Road rescue)",
                         "description" => "Get Towing and Recovery services from AA Kenya.",
                         "category_code" => env("ROAD_RESCUE", "REC"),
-                        "class_code" => env("OPTIONAL_BENEFITS", "000"), // Optional benefits class
+                        "class_code" => env("EXTRAS", "000"), // Optional benefits class
                         "is_optional_benefit" => true, // Use to avoid attaching charges
                         "tariffs" => [
                             [

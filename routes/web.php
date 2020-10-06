@@ -35,6 +35,12 @@ Route::get('/insurers/edit/{id}', 'InsurerController@edit')->name('insurers.edit
 
 Route::put('/insurers/edit', 'InsurerController@update')->name('insurers.update');
 
+// Extras
+Route::get('/extras', 'ExtrasController@index')->name('extras');
+
+// Benefits
+Route::get('/benefits', 'BenefitsController@index')->name('benefits');
+
 // Settings
 Route::get('/settings', 'SettingController@index')->name('settings');
   

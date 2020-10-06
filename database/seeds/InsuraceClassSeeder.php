@@ -37,8 +37,8 @@ class InsuranceClassSeeder extends Seeder
 
         // Optional Benefits class [hack]
         $optional_benefit = new App\InsuranceClass([
-            "name" => "Optional benefits",
-            "value" =>  env("OPTIONAL_BENEFITS", "000")
+            "name" => "Extra products",
+            "value" =>  env("EXTRAS", "000")
         ]);
         $optional_benefit->save();
     }

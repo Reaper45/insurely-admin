@@ -30,7 +30,7 @@ class CategorySeeder extends Seeder
         ]);
 
         // 
-        $optionalBenefitsClass = App\InsuranceClass::where("value", env("OPTIONAL_BENEFITS", "000"))->first();
+        $optionalBenefitsClass = App\InsuranceClass::where("value", env("EXTRAS", "000"))->first();
         $optionalBenefitsClass->categories()->saveMany([
             new App\Category([
                 'name'=>'Road Rescue',

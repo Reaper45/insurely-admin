@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Benefit;
+use App\Category;
+use App\InsuranceClass;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -18,34 +21,24 @@ class SettingController extends Controller
      */
     public function index()
     {
-        
-        return view('settings', ['insuranceClass' => $this->getInsuranceClasses()]);
+        $insuranceClasses = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+
+        return view('settings', ['insuranceClasses' => $insuranceClasses->children ]);
     }
 
     public function insuranceClass($class_id)
     {
-        switch($class_id) {
-            case "1":
-                $category = (object)['name' => 'Motor Private', 'id' => 1];
-                break;
-            default:
-                $category = (object)['name' => 'Motor Commercial', 'id' => 2];
-                break;
-        }
+        $insuranceClasses = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $insuranceClass = InsuranceClass::find($class_id);
 
-        return view('categories', ['category' => $category, 'insuranceClass' => $this->getInsuranceClasses()]);
+        return view('categories', ['insuranceClasses' => $insuranceClasses->children, 'insuranceClass' => $insuranceClass]);
     }
 
     public function benefits()
     {
-        return view('benefits', ['insuranceClass' => $this->getInsuranceClasses()]);
-    }
+        $insuranceClasses =  InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $benefits = Benefit::all();
 
-    public function getInsuranceClasses()
-    {
-        return [
-            (object)['name' => 'Motor Private', 'id' => 1],
-            (object)['name' => 'Motor Commercial', 'id' => 2]
-        ];
+        return view('benefits', ['insuranceClasses' => $insuranceClasses->children, "benefits" => $benefits]);
     }
 }
