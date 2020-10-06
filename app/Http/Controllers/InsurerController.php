@@ -112,14 +112,16 @@ class InsurerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $insurer = Insurer::find($id);
+        $insurer->delete();
+
+        return redirect()->back();
+        
     }
     
     public function logo($id)
     {
-        # code...
         $insurer = Insurer::find($id);
-        // dd($insurer);
         return response($this->getFile('public', $insurer->logo), 200);
     }
 }

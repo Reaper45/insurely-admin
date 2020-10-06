@@ -27,6 +27,8 @@ Route::put('/products/edit', 'ProductController@update')->name('products.update'
 // Insurer
 Route::get('/insurers', 'InsurerController@index')->name('insurers');
 
+Route::post('/insurers/{id}', 'InsurerController@destroy')->name('insurers.delete');
+
 Route::get('/insurers/{id}/logo/', 'InsurerController@logo')->name("insurers.avatar");
 
 Route::get('/insurers/create', 'InsurerController@create')->name('insurers.create');
