@@ -9,7 +9,7 @@
             </div>
             <div class="ml-4">
                 <div class="text-sm leading-5 font-medium text-gray-900">{{ $product->name }}</div>
-                <div class="text-sm leading-5 text-gray-500">Price: 0.35%</div>
+                <div class="text-sm leading-5 text-gray-500">Price: {{ $product->tariffs->first()->is_percentage ? "" : "Ksh." }}{{ $product->tariffs->first()->value }} {{ $product->tariffs->first()->is_percentage ? "%" : "" }}</div>
             </div>
         </div>
     </td>
