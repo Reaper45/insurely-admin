@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tariff extends Model
 {
+    public $fillable = ["name", "value", "is_percentage"];
+ 
     //
     public function benefits()
     {

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\InsuranceClass;
+use App\Insurer;
+use App\Product;
+use App\Tariff;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,14 +22,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $products = Product::all();
-        $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $products = Product::all();
+        // $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
 
-        $products = [];
+        // $products = [];
 
-        foreach ($motorPrivate->children as $child) {
-            array_push($products, ...$child->products);
-        }
+        // foreach ($motorPrivate->children as $child) {
+        //     array_push($products, ...$child->products);
+        // }
 
         return view('products')->with(["products" => $products]);
     }
@@ -37,7 +41,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $insurers = Insurer::all();
+        $categories = Category::all();
+
+        return view('new-product')->with(["insurers" => $insurers, "categories" => $categories]);
     }
 
     /**
@@ -48,7 +55,40 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|unique:products|max:255',
+            'description' => 'string|nullable|max:255',
+            'insurer_id' => 'required|exists:App\Insurer,id',
+            'category_id' => 'required|exists:App\Category,id',
+            'price' => 'required|numeric',
+        ]);
+
+        $insurer = Insurer::find($data["insurer_id"]);
+        $category = Category::find($data["category_id"]);
+
+        $insuranceClass = $category->insuranceClass;
+
+        $product = new Product;
+        $product->name = $data["name"];
+        $product->description = $data["description"];
+        $product->has_ipf = $request->has("has_ipf");
+
+        $product->insurer()->associate($insurer);
+        $product->category()->associate($category);
+        $product->insuranceClass()->associate($insuranceClass);
+
+        // dd($product);
+
+        $product->save();
+
+        // Tariff
+        $product->tariffs()->attach(Tariff::firstOrCreate([
+            "name" => $data["name"],
+            "value" => $data["price"],
+            "is_percentage" => $request->has("is_percentage")
+        ]));
+
+        return redirect()->route("products");
     }
 
     /**
@@ -70,8 +110,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
-        return view('products-edit');
+        return view('edit-products');
     }
 
     /**

@@ -12,4 +12,10 @@ class Category extends Model
         # code...
         return $this->hasMany(Product::class);
     }
+
+    public function insuranceClass()
+    {
+        # code...
+        return $this->belongsTo(InsuranceClass::class);
+    }      
 }

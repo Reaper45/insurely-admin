@@ -16,7 +16,7 @@ class CreateInsuranceClassesTable extends Migration
         Schema::create('insurance_classes', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
-            $table->float("value");
+            $table->string("value");
             $table->foreignId("parent_id")->nullable();
 
             $table->foreign('parent_id')

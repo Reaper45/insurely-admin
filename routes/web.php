@@ -18,11 +18,15 @@ Auth::routes(['register' => false]);
 
 Route::get('/products', 'ProductController@index')->name('products');
 
-Route::post('/products/create', 'ProductController@create')->name('products.create');
+Route::get('/products/create', 'ProductController@create')->name('products.create');
+
+Route::post('/products/create', 'ProductController@store')->name('products.store');
 
 Route::get('/products/edit/{id}', 'ProductController@edit')->name('products.edit');
 
 Route::put('/products/edit', 'ProductController@update')->name('products.update');
+
+Route::delete('/products/{id}', 'ProductController@destroy')->name('products.delete');
 
 // Insurer
 Route::get('/', 'InsurerController@index')->name('insurers');
