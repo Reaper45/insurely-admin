@@ -20,10 +20,10 @@
             <div class="align-middle inline-block min-w-full overflow-hidden">
                 <form class="w-full max-w-lg" method="POST" action="{{route('insurers.store')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="bg-white p-1">
                         <x-insurer-form />
                     </div>
-                    <div class=" px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <div class="sm:flex sm:flex-row-reverse justify-between	">
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                             <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                 Save
@@ -41,4 +41,8 @@
     </div>
   </div>
 </main>
+<script>
+  var navItem = document.getElementById("nav-item-patners");
+  navItem.classList.add("active")
+</script>
 @endsection

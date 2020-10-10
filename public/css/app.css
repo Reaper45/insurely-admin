@@ -36692,6 +36692,11 @@ video {
   font-family: Inter var, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, "Nunito", sans-serif;
 }
 
+.nav-item.active {
+  color: #2A4365 !important;
+  font-weight: 600;
+}
+
 @media (min-width: 640px){
   .sm\:space-y-0 > :not(template) ~ :not(template){
     --space-y-reverse: 0;

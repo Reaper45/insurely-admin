@@ -28656,7 +28656,7 @@ function EditProduct() {
   }, "I'm an example component!")))));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Example);
+/* harmony default export */ __webpack_exports__["default"] = (EditProduct);
 
 if (document.getElementById("edit-product")) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EditProduct, null), document.getElementById("edit-product"));

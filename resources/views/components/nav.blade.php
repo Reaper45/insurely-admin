@@ -9,11 +9,11 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline">
-                        <a href="{{ route('products') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 ">Products</a>
-                        <a href="{{ route('benefits') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 ">Benefits</a>
-                        <a href="{{ route('extras') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 ">Extras</a>
-                        <a href="{{ route('insurers') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 ">Patners</a>
-                        <a href="{{ route('settings') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 ">Settings</a>
+                        <a href="{{ route('insurers') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-patners">Patners</a>
+                        <a href="{{ route('products') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-products">Products</a>
+                        <a href="{{ route('benefits') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-benefits">Benefits</a>
+                        <a href="{{ route('extras') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-extras">Extras</a>
+                        <a href="{{ route('settings') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-settings">Settings</a>
                     </div>
                 </div>
             </div>

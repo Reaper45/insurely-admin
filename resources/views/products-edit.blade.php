@@ -46,5 +46,9 @@
         </form>
     </div>
 </main>
+<script>
+  var navItem = document.getElementById("nav-item-products");
+  navItem.classList.add("active")
+</script>
 
 @endsection

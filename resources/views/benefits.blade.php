@@ -124,4 +124,8 @@
         </div>
     </div>
 </main>
+<script>
+  var navItem = document.getElementById("nav-item-benefits");
+  navItem.classList.add("active")
+</script>
 @endsection

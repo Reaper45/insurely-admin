@@ -33,4 +33,8 @@
       </div>
     </div>
 </main>
+<script>
+  var navItem = document.getElementById("nav-item-settings");
+  navItem.classList.add("active")
+</script>
 @endsection

@@ -65,9 +65,10 @@ class InsurerController extends Controller
         $insurer->telephone = $data["phone_number"];
         $insurer->logo = $fileName;
 
+
         $insurer->save();
 
-        return redirect("insurers");
+        return redirect()->route("insurers");
     }
 
     /**

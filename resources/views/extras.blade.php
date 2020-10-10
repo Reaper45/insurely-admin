@@ -88,4 +88,8 @@
       </table>
     </div>
 </main>
+<script>
+  var navItem = document.getElementById("nav-item-extras");
+  navItem.classList.add("active")
+</script>
 @endsection

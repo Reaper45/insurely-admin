@@ -17,7 +17,7 @@ function EditProduct() {
     );
 }
 
-export default Example;
+export default EditProduct;
 
 if (document.getElementById("edit-product")) {
     ReactDOM.render(<EditProduct />, document.getElementById("edit-product"));
