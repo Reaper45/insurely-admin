@@ -177,11 +177,11 @@ class ProductSeeder extends Seeder
                             ],
                             [
                                 ["name" => "Windscreen"],
-                                ["limit" => "Kshs .30,000/-"]
+                                ["limit" => "Kshs .30,000/-", "is_adjustable" => true,]
                             ],
                             [
                                 ["name" => "Radio Cassette"],
-                                ["limit" => "Kshs. 30,000/-"]
+                                ["limit" => "Kshs. 30,000/-", "is_adjustable" => true,]
                             ],
                             [
                                 ["name" => "Third party property damage"],
@@ -219,7 +219,10 @@ class ProductSeeder extends Seeder
                         "benefits" => [
                             [
                                 ["name" => "Road rescue"],
-                                ["description" => "Get Towing and Recovery services from AA Kenya"],
+                                [
+                                    "description" => "Get Towing and Recovery services from AA Kenya",
+                                    "is_optional" => true
+                                ],
                             ],
                         ]
                     ]

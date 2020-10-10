@@ -85,7 +85,7 @@
                   <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Adjustable
                   </th>
-                  <th class="px-6 py-3"></th>
+                  {{-- <th class="px-6 py-3"></th> --}}
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
@@ -100,19 +100,28 @@
                         {{ $benefit->description }}
                       </div>
                     </td>
+                    @if ($benefit->is_optional)
+                      <td class="px-6 py-4 whitespace-no-wrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                          Optional
+                        </span>
+                      </td>
+                    @else
+                      <td class="px-6 py-4 whitespace-no-wrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                          In built
+                        </span>
+                      </td>
+                    @endif
+                    
                     <td class="px-6 py-4 whitespace-no-wrap">
                       <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
+                        {{$benefit->is_adjustable ? "Adjustable" : ""}}
                       </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                    {{-- <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                       <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
+                    </td> --}}
                   </tr>
                 @endforeach
 
