@@ -17,10 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->string("code")->unique();
-            $table->foreignId('insurance_class_id');
-
-            $table->foreign('insurance_class_id')->references('id')->on('insurance_classes');
-
+            $table->foreignId('insurance_class_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

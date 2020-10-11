@@ -24,7 +24,6 @@ class CreateProductsTable extends Migration
             $table->foreignId('insurance_class_id');
             $table->timestamps();
 
-            // $table->foreign('insurer_id')->references('id')->on('insurers');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('insurance_class_id')->references('id')->on('insurance_classes');
 

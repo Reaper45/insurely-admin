@@ -15,9 +15,7 @@ class CreateUserMFADetailsTable extends Migration
     {
         Schema::create('user_mfa_details', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id');
             $table->string('phone_number');
-            // $table->string("mfa_type")->unique();
             $table->string("secret");
             $table->timestamp("expires_in");
             $table->timestamps();

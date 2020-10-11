@@ -17,14 +17,6 @@ class CreateProductTariffsTable extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('tariff_id')->constrained()->onDelete('cascade');
-
-            // $table->foreign('product_id', 'pt_foreign_product')
-            //         ->references('id')
-            //         ->on('products');
-
-            // $table->foreign('tariff_id', 'pt_foreign_tariff')
-            //         ->references('id')
-            //         ->on('tariffs');
         });
     }
 
