@@ -14,22 +14,22 @@ class ProductSeeder extends Seeder
     {
         $insurers = [
             [
-                "name" => "Sanlam Insurance",
-                "email" => "info@sanlam.co.ke",
-                "logo" => "sanlaam.jpg",
+                "name"      => "Sanlam Insurance",
+                "email"     => "info@sanlam.co.ke",
+                "logo"      => "sanlaam.jpg",
                 "telephone" => "0700100200",
                 "is_active" => true,
-                "products" => [
+                "products"  => [
                     [
-                        "name" => "Sanlam Comprehensive Cover",
+                        "name"          => "Sanlam Comprehensive Cover",
                         "category_code" => env("MOTOR_PRIVATE_COMP", "COMP"),
-                        "class_code" => "601",
-                        "description" => "",
-                        "tariffs" => [
+                        "class_code"    => "601",
+                        "description"   => "",
+                        "tariffs"       => [
                             [
-                                "name" => "sum_insured_comp",
-                                "value" => 3.25,
-                                "is_active" => true,
+                                "name"          => "sum_insured_comp",
+                                "value"         => 3.25,
+                                "is_active"     => true,
                                 "is_percentage" => true,
                             ]
                         ],
@@ -37,68 +37,68 @@ class ProductSeeder extends Seeder
                             [
                                 ["name" => "Third party personal injury"],
                                 [
-                                    "limit" => "Kshs.3Million",
+                                    "limit"       => "Kshs. 3M",
                                     "is_optional" => false
                                 ]
                             ],
                             [
-                                ["name" => "Third party property damage"],
-                                ["limit" =>" Kshs. 5 Million"]
+                                ["name"  => "Third party property damage"],
+                                ["limit" =>" Kshs. 5M"]
                             ],
                             [
-                                ["name" => "Passenger legal liability"],
-                                ["description" => "Any one person - Kshs. 3 Million:Any one event - Kshs. 20 Million"]
+                                ["name"        => "Passenger legal liability"],
+                                ["description" => "Any one person - Kshs. 3M; Any one event - Kshs. 20M"]
                             ],
                             [
-                                ["name" => "Radio cassette"],
+                                ["name"  => "Radio cassette"],
                                 ["limit" => "Kshs. 30,000/="]
                             ],
                             [
-                                ["name" => "Windscreen & window glass"],
+                                ["name"  => "Windscreen & window glass"],
                                 ["limit" => "Upto Kshs. 30, 000/="]
                             ],
                             [
-                                ["name" => "Medical expenses"],
-                                ["limit" => "Kshs.30,000/="]
+                                ["name"  => "Medical expenses"],
+                                ["limit" => "Kshs. 30,000/="]
                             ],
                             [
-                                ["name" => "Towing charges"],
+                                ["name"  => "Towing charges"],
                                 ["limit" => "Kshs. 50,000/="]
                             ],
                             [
-                                ["name" => "Repair Authority"],
+                                ["name"  => "Repair Authority"],
                                 ["limit" => "kshs. 50,000/="]
                             ],
                             [
-                                ["name" => "Geographical"],
+                                ["name"  => "Geographical"],
                                 ["limit" => "Kenya"]
                             ],
                             // Optional
                             [
                                 ["name" => "Excess protector", ],
                                 [
-                                    "is_optional" => true,
+                                    "is_optional"   => true,
                                     "is_adjustable" => false,
                                 ],
                                 [
                                     // benefit tariff
-                                    "name" => "excess_protector",
-                                    "value" => 1700,
-                                    "is_active" => true,
+                                    "name"          => "excess_protector",
+                                    "value"         => 1700,
+                                    "is_active"     => true,
                                     "is_percentage" => false,
                                 ]
                             ],
                             [
                                 ["name" => "Political violence and terrorism"],
                                 [
-                                    "is_optional" => true,
+                                    "is_optional"   => true,
                                     "is_adjustable" => false,
                                 ],
                                 [
                                     // benefit tariff
-                                    "name" => "political_violence_and_terrorism",
-                                    "value" => 1700,
-                                    "is_active" => true,
+                                    "name"          => "political_violence_and_terrorism",
+                                    "value"         => 1700,
+                                    "is_active"     => true,
                                     "is_percentage" => false,
                                 ]
                             ]
@@ -107,84 +107,84 @@ class ProductSeeder extends Seeder
                 ],
             ],
             [
-                "name" => "First Assurance Company Limited",
-                "email" => "hoinfo@firstassurance.co.ke",
-                "logo" => "first-assurance.jpg",
+                "name"      => "First Assurance Company Limited",
+                "email"     => "hoinfo@firstassurance.co.ke",
+                "logo"      => "first-assurance.jpg",
                 "telephone" => "0202900000",
                 "is_active" => true,
-                "products" => [
+                "products"  => [
                     [
-                        "name" => "First Assurance Third party",
+                        "name"          => "First Assurance Third party",
                         "category_code" => env("MOTOR_PRIVATE_TPO", "TPO"),
-                        "class_code" => "601",
-                        "description" => "",
-                        "tariffs" => [
+                        "class_code"    => "601",
+                        "description"   => "",
+                        "tariffs"       => [
                             [
-                                "name" => "sum_insured_tp",
-                                "value" => 7500,
-                                "is_active" => true,
+                                "name"          => "sum_insured_tp",
+                                "value"         => 7500,
+                                "is_active"     => true,
                                 "is_percentage" => false,
                             ]
                         ],
                         "benefits" => [
                             [
-                                ["name" => "Third party only"],
+                                ["name"  => "Third party only"],
                                 ["limit" => "kshs. 7,500/= "]
                             ],
                             [
-                                ["name" => "New & Young"],
-                                ["limit" => "kshs 10,000/= additional"]
+                                ["name"  => "New & Young"],
+                                ["limit" => "kshs. 10,000/= additional"]
                             ],
                             [
-                                ["name" => "Third party property damage"],
+                                ["name"  => "Third party property damage"],
                                 ["limit" => "kshs. 20,000,000/="]
                             ],
                             [
-                                ["name" => "Passenger Legal Liability"],
+                                ["name"  => "Passenger Legal Liability"],
                                 ["limit" => "3M per person, 20M per event"]
                             ]
                         ]
                     ],
                     [
-                        "name" => "First Assurance Third Party Fire & Theft",
+                        "name"          => "First Assurance Third Party Fire & Theft",
                         "category_code" => env("MOTOR_PRIVATE_TPFT", "TPFT"),
-                        "class_code" => "601",
-                        "description" => "",
-                        "tariffs" => [
+                        "class_code"    => "601",
+                        "description"   => "",
+                        "tariffs"       => [
                            [
-                                "name" => "sum_insured_tpft",
-                                "value" => 3,
-                                "is_active" => true,
+                                "name"          => "sum_insured_tpft",
+                                "value"         => 3,
+                                "is_active"     => true,
                                 "is_percentage" => true,
                            ]
                         ],
                         "benefits" => [
                             [
-                                ["name" => "Theft With Anti Theft Device"],
+                                ["name"  => "Theft With Anti Theft Device"],
                                 ["limit" => "Excess 10% of value Min Kshs. 20,000/-"]
                             ],
                             [
-                                ["name" => "Theft Without Anti theft Device"],
+                                ["name"  => "Theft Without Anti theft Device"],
                                 ["limit" => "Excess 20% of value Min Kshs. 20,000/-"]
                             ],
                             [
-                                ["name" => "Third party only"],
+                                ["name"  => "Third party only"],
                                 ["limit" => "Kshs. 7,500/= "]
                             ],
                             [
-                                ["name" => "New & Young"],
-                                ["limit" => "kshs 10,000/= additional"]
+                                ["name"  => "New & Young"],
+                                ["limit" => "kshs. 10,000/= additional"]
                             ],
                             [
-                                ["name" => "Windscreen"],
-                                ["limit" => "Kshs .30,000/-", "is_adjustable" => true,]
-                            ],
-                            [
-                                ["name" => "Radio Cassette"],
+                                ["name"  => "Windscreen"],
                                 ["limit" => "Kshs. 30,000/-", "is_adjustable" => true,]
                             ],
                             [
-                                ["name" => "Third party property damage"],
+                                ["name"  => "Radio Cassette"],
+                                ["limit" => "Kshs. 30,000/-", "is_adjustable" => true,]
+                            ],
+                            [
+                                ["name"  => "Third party property damage"],
                                 ["limit" => "kshs. 20,000,000/-"]
                             ],
                             [
@@ -196,23 +196,23 @@ class ProductSeeder extends Seeder
                 ]
             ],
             [
-                "name" => "AA Kenya",
-                "email" => "aak@aakenya.co.ke",
-                "logo" => "aa.png",
+                "name"      => "AA Kenya",
+                "email"     => "aak@aakenya.co.ke",
+                "logo"      => "aa.png",
                 "telephone" => "0709 933 000",
                 "is_active" => true,
-                "products" => [
+                "products"  => [
                     [
-                        "name" => "Towing & recovery (Road rescue)",
-                        "description" => "Get Towing and Recovery services from AA Kenya.",
-                        "category_code" => env("ROAD_RESCUE", "REC"),
-                        "class_code" => env("EXTRAS", "000"), // Optional benefits class
+                        "name"                => "Towing & recovery (Road rescue)",
+                        "description"         => "Get Towing and Recovery services from AA Kenya.",
+                        "category_code"       => env("ROAD_RESCUE", "REC"),
+                        "class_code"          => env("EXTRAS", "000"), // Optional benefits class
                         "is_optional_benefit" => true, // Use to avoid attaching charges
-                        "tariffs" => [
+                        "tariffs"             => [
                             [
-                                "name" => "aa_towing_and_recovering",
-                                "value" => 6500,
-                                "is_active" => true,
+                                "name"          => "aa_towing_and_recovering",
+                                "value"         => 6500,
+                                "is_active"     => true,
                                 "is_percentage" => false,
                             ]
                         ],
@@ -232,10 +232,10 @@ class ProductSeeder extends Seeder
 
         foreach ($insurers as $in) {
             // Insurer
-            $insurer = new App\Insurer;
-            $insurer->name = $in["name"];
-            $insurer->email = $in["email"];
-            $insurer->logo = $in["logo"];
+            $insurer            = new App\Insurer;
+            $insurer->name      = $in["name"];
+            $insurer->email     = $in["email"];
+            $insurer->logo      = $in["logo"];
             $insurer->telephone = $in["telephone"];
             $insurer->is_active = true;
 
@@ -245,14 +245,14 @@ class ProductSeeder extends Seeder
             $products = $in["products"];
             foreach ($products as $prod) {
                 $category = App\Category::where('code', $prod["category_code"])->first();
-                $class = App\InsuranceClass::where('value', $prod["class_code"])->first();
+                $class    = App\InsuranceClass::where('value', $prod["class_code"])->first();
 
                 // Product
-                $product = new App\Product;
-                $product->name = $prod["name"];
+                $product              = new App\Product;
+                $product->name        = $prod["name"];
                 $product->description = $prod["description"];
-                // $product->has_ipf = $prod["has_ipf"];
-                $product->is_active = true;
+                // $product->has_ipf  = $prod["has_ipf"];
+                $product->is_active   = true;
                 
                 $product->insuranceClass()->associate($class);
                 $product->category()->associate($category); 

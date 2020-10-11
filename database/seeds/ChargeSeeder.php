@@ -15,21 +15,21 @@ class ChargeSeeder extends Seeder
         // All products have these charges
         $charges = [
             [
-                "name" => 'Training Levy',
-                "value" => 0.20,
-                "is_active" => true,
+                "name"          => 'Training Levy',
+                "value"         => 0.20,
+                "is_active"     => true,
                 "is_percentage" => true
             ],
             [
-                "name" => 'IPCHF',
-                "value" => 0.25,
-                "is_active" => true,
+                "name"          => 'IPCHF',
+                "value"         => 0.25,
+                "is_active"     => true,
                 "is_percentage" => true
             ],
             [
-                "name" => 'Stamp Duty',
-                "value" => 40,
-                "is_active" => true,
+                "name"          => 'Stamp Duty',
+                "value"         => 40,
+                "is_active"     => true,
                 "is_percentage" => false
             ]
         ];
