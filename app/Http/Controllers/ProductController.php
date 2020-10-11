@@ -37,10 +37,18 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $insurers   = Insurer::all();
-        $categories = Category::all();
+        $insurers    = Insurer::all();
+        $categories  = Category::all();
+        $allBenefits = Benefit::all();
+        $allCharges  = Charge::all();
 
-        return view('new-product')->with(["insurers" => $insurers, "categories" => $categories]);
+
+        return view('new-product')->with([
+            "insurers"    => $insurers, 
+            "categories"  => $categories,
+            "allBenefits" => $allBenefits,
+            "allCharges"  => $allCharges    
+        ]);
     }
 
     /**
@@ -57,6 +65,8 @@ class ProductController extends Controller
             'insurer_id'  => 'required|exists:App\Insurer,id',
             'category_id' => 'required|exists:App\Category,id',
             'price'       => 'required|numeric',
+            'benefits'    => 'sometimes|required|array',
+            'charges'     => 'sometimes|required|array',
         ]);
 
         $insurer  = Insurer::find($data["insurer_id"]);
@@ -75,6 +85,24 @@ class ProductController extends Controller
         $product->insuranceClass()->associate($insuranceClass);
 
         $product->save();
+        
+        // Applicable benefits
+        if($request->has("benefits")){
+            foreach ($data["benefits"] as $key => $value) {
+                $benefit = Benefit::find($value);
+                
+                $product->benefits()->attach($benefit);
+            }
+        }
+
+        // Applicable charges
+        if($request->has("charges")){
+            foreach ($data["charges"] as $key => $value) {
+                $benefit = Charge::find($value);
+                
+                $product->charges()->attach($benefit);
+            }
+        }
 
         // Tariff
         $product->tariffs()->attach(Tariff::firstOrCreate([
@@ -153,18 +181,22 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the product from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route("products");
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the product benefit from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -177,7 +209,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the product charge from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

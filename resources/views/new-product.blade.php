@@ -21,19 +21,113 @@
                 <div x-data="{ open: false }"  class="relative" >
                   <form class="w-full max-w-5xl" method="POST" action="{{route('products.store')}}" >
                       @csrf
-                      <div class="bg-white p-1">
-                        <div class="grid gap-4 grid-cols-2">
-                          <div>
-                            <x-product-form :insurers="$insurers" :categories="$categories" />
+                    <div class="bg-white p-1">
+                      <div class="grid gap-4 grid-cols-2">
+                        <div>
+                          <x-product-form :insurers="$insurers" :categories="$categories" />
+                        
+                          <div class="mb-4 border-t border-gray-300"></div>
                           
-                            <div class="mb-4 border-t border-gray-300"></div>
-                            
-                            <x-price-form />
-                          </div>
-                          <div>
-                            <div class="ml-6">
-                              <div class="text-sm leading-5 font-medium text-gray-700">Applicable Charges</div>
+                          <x-price-form />
+                        </div>
+                        <div>
+                          <div class="ml-6">
+                            <div class="text-sm leading-5 font-medium text-gray-700">Applicable Charges</div>
+                              <div style="max-height: 350px; overflow: auto;">
+                                <fieldset>
+                                  <table class="min-w-full divide-y divide-gray-200">
+                                      <thead>
+                                          <tr>
+                                              <th colspan="2" class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                  Charge
+                                              </th>
+                                              <th class="px-6 py-3"></th>
+                                          </tr>
+                                      </thead>
 
+                                      <tbody class="bg-white divide-y divide-gray-200">
+                                          @foreach ($allCharges as $charge)
+                                          <tr>
+                                              <td class="px-4 py-2">
+                                                  <input name="charges[]" class="mr-2 leading-tight" value="{{$charge->id}}" type="checkbox">
+                                              </td>
+                                              <td class="px-4 py-3">
+                                                  <div class="text-sm leading-5 text-gray-900">{{ $charge->name }}</div>
+                                                  {{-- <div class="text-sm leading-5 text-gray-500">{{ $benefit->limit }}</div> --}}
+                                              </td>
+                                              <td class="px-6">
+                                                  <div class="text-xs leading-5 text-gray-500">
+                                                      {{ $charge->is_percentage ? "" : "Ksh. " }}
+                                                      {{ $charge->value }}
+                                                      {{ $charge->is_percentage ? "%" : "" }}
+                                                  </div>
+                                              </td>
+                                          </tr>
+
+                                          @endforeach
+                                      </tbody>
+                                  </table>
+                              </fieldset>
+                              </div>
+                            </div>
+
+                            <div class="mb-4 border-t border-gray-300"></div>
+
+                            <div class="text-sm leading-5 font-medium text-gray-700">Applicable benefits</div>
+                              <div style="max-height: 350px; overflow: auto;">
+                                <fieldset>
+                                  <table class="min-w-full divide-y divide-gray-200">
+                                      <thead>
+                                          <tr>
+                                              <th colspan="3" class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                  Title
+                                              </th>
+                                              <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                  Price
+                                              </th>
+                                          </tr>
+                                      </thead>
+
+                                      <tbody class="bg-white divide-y divide-gray-200">
+                                          @foreach ($allBenefits as $benefit)
+                                          <tr>
+                                              <td class="px-4 py-2">
+                                                  <input name="benefits[]" class="mr-2 leading-tight" value="{{$benefit->id}}" type="checkbox">
+                                              </td>
+                                              <td class="px-4 py-3">
+                                                  <div class="text-sm leading-5 text-gray-900">{{ $benefit->name }}</div>
+                                                  <div class="text-sm leading-5 text-gray-500">{{ $benefit->limit }}</div>
+                                              </td>
+                                              @if ($benefit->is_optional)
+                                                  <td class="px-4 py-3 whitespace-no-wrap">
+                                                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                      Optional
+                                                      </span>
+                                                  </td>
+                                                  @else
+                                                  <td class="px-6 py-4 whitespace-no-wrap">
+                                                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                      In built
+                                                      </span>
+                                                  </td>
+                                              @endif
+                                              <td class="px-6 whitespace-no-wrap">
+                                                  @if ($benefit->tariffs->first())
+                                                      <div class="text-xs leading-5 text-gray-500">
+                                                          {{ $benefit->tariffs->first()->is_percentage ? "" : "Ksh. " }}
+                                                          {{ $benefit->tariffs->first()->value }}
+                                                          {{ $benefit->tariffs->first()->is_percentage ? "%" : "" }}
+                                                      </div>
+                                                  @endif
+                                                  
+                                              </td>
+                                          </tr>
+
+                                          @endforeach
+                                      </tbody>
+                                  </table>
+                                </fieldset>
+                              </div>                              
                             </div>
                           </div>
                         </div>
