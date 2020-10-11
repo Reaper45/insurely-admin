@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Benefit;
 use App\Category;
 use App\InsuranceClass;
 use App\Insurer;
@@ -110,7 +111,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('edit-products');
+        $product = Product::find($id);
+        $allBenefits = Benefit::all();
+
+        return view('edit-products')->with(["product" => $product, "allBenefits" => $allBenefits]);
     }
 
     /**
@@ -122,7 +126,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            "benefits" => "required|array"
+        ]);
+
+        $product = Product::find($id);
+
+        foreach ($data["benefits"] as $key => $value) {
+            $benefit = Benefit::find($value);
+            
+            $product->benefits()->attach($benefit);
+        }
+
+        return redirect()->back();
+
     }
 
     /**

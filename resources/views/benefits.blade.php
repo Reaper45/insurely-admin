@@ -79,9 +79,9 @@
                   <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Description
                   </th>
-                  <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  {{-- <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Optional
-                  </th>
+                  </th> --}}
                   <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Adjustable
                   </th>
@@ -100,7 +100,7 @@
                         {{ $benefit->description }}
                       </div>
                     </td>
-                    @if ($benefit->is_optional)
+                    {{-- @if ($benefit->is_optional)
                       <td class="px-6 py-4 whitespace-no-wrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Optional
@@ -112,7 +112,7 @@
                           In built
                         </span>
                       </td>
-                    @endif
+                    @endif --}}
                     
                     <td class="px-6 py-4 whitespace-no-wrap">
                       <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

@@ -22,26 +22,27 @@ Route::get('/products/create', 'ProductController@create')->name('products.creat
 
 Route::post('/products/create', 'ProductController@store')->name('products.store');
 
-Route::get('/products/edit/{id}', 'ProductController@edit')->name('products.edit');
-
-Route::put('/products/edit', 'ProductController@update')->name('products.update');
-
 Route::delete('/products/{id}', 'ProductController@destroy')->name('products.delete');
+
+Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
+
+Route::put('/products/{id}/edit', 'ProductController@update')->name('products.update');
+
 
 // Insurer
 Route::get('/', 'InsurerController@index')->name('insurers');
-
-Route::delete('/insurers/{id}', 'InsurerController@destroy')->name('insurers.delete');
-
-Route::get('/insurers/{id}/logo/', 'InsurerController@logo')->name("insurers.avatar");
 
 Route::get('/insurers/create', 'InsurerController@create')->name('insurers.create');
 
 Route::post('/insurers/create', 'InsurerController@store')->name('insurers.store');
 
-Route::get('/insurers/edit/{id}', 'InsurerController@edit')->name('insurers.edit');
+Route::delete('/insurers/{id}', 'InsurerController@destroy')->name('insurers.delete');
 
-Route::put('/insurers/edit', 'InsurerController@update')->name('insurers.update');
+Route::get('/insurers/{id}/edit', 'InsurerController@edit')->name('insurers.edit');
+
+Route::put('/insurers/{id}/edit', 'InsurerController@update')->name('insurers.update');
+
+Route::get('/insurers/{id}/logo', 'InsurerController@logo')->name("insurers.avatar");
 
 // Extras
 Route::get('/extras', 'ExtrasController@index')->name('extras');
