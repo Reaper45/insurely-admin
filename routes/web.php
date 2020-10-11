@@ -31,6 +31,7 @@ Route::put('/products/{id}/edit', 'ProductController@update')->name('products.up
 
 Route::delete('/products/charges/{id}', 'ProductController@removeCharge')->name('products.charges.delete');
 
+Route::delete('/products/benefits/{id}', 'ProductController@removeBenefit')->name('products.benefits.delete');
 
 // Insurer
 Route::get('/', 'InsurerController@index')->name('insurers');

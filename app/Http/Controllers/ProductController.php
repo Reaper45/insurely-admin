@@ -169,6 +169,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function removeBenefit($id)
+    {
+        DB::table('product_benefits')->where('benefit_id', $id)->delete();
+
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function removeCharge($id)
     {
         DB::table('product_charges')->where('charge_id', $id)->delete();

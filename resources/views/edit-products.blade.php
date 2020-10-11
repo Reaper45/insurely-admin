@@ -231,7 +231,7 @@
                                 </td>
 
                                  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                    <form action="" method="post">
+                                    <form action="{{route('products.benefits.delete', ["id" => $benefit->id, "_method" => "DELETE"])}}" method="post">
                                         @csrf
                                         <button type="submit" class="inline-flex items-center px-2 py-1 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
                                             Remove
