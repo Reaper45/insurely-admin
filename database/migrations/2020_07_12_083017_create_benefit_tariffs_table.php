@@ -15,16 +15,16 @@ class CreateBenefitTariffsTable extends Migration
     {
         Schema::create('benefit_tariffs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('benefit_id');
-            $table->foreignId('tariff_id');
+            $table->foreignId('benefit_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tariff_id')->constrained()->onDelete('cascade');
 
-            $table->foreign('benefit_id', 'bt_foreign_benefit')
-                    ->references('id')
-                    ->on('benefits');
+            // $table->foreign('benefit_id', 'bt_foreign_benefit')
+            //         ->references('id')
+            //         ->on('benefits');
 
-            $table->foreign('tariff_id', 'bt_foreign_tariff')
-                    ->references('id')
-                    ->on('tariffs');
+            // $table->foreign('tariff_id', 'bt_foreign_tariff')
+            //         ->references('id')
+            //         ->on('tariffs');
         });
     }
 

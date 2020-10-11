@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Benefit;
 use App\Category;
+use App\Charge;
 use App\InsuranceClass;
 use App\Insurer;
 use App\Product;
@@ -24,13 +25,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        // $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
-
-        // $products = [];
-
-        // foreach ($motorPrivate->children as $child) {
-        //     array_push($products, ...$child->products);
-        // }
 
         return view('products')->with(["products" => $products]);
     }
@@ -42,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $insurers = Insurer::all();
+        $insurers   = Insurer::all();
         $categories = Category::all();
 
         return view('new-product')->with(["insurers" => $insurers, "categories" => $categories]);
@@ -57,35 +51,34 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|unique:products|max:255',
+            'name'        => 'required|string|unique:products|max:255',
             'description' => 'string|nullable|max:255',
-            'insurer_id' => 'required|exists:App\Insurer,id',
+            'insurer_id'  => 'required|exists:App\Insurer,id',
             'category_id' => 'required|exists:App\Category,id',
-            'price' => 'required|numeric',
+            'price'       => 'required|numeric',
         ]);
 
-        $insurer = Insurer::find($data["insurer_id"]);
+        $insurer  = Insurer::find($data["insurer_id"]);
         $category = Category::find($data["category_id"]);
 
         $insuranceClass = $category->insuranceClass;
 
         $product = new Product;
-        $product->name = $data["name"];
+
+        $product->name        = $data["name"];
         $product->description = $data["description"];
-        $product->has_ipf = $request->has("has_ipf");
+        $product->has_ipf     = $request->has("has_ipf");
 
         $product->insurer()->associate($insurer);
         $product->category()->associate($category);
         $product->insuranceClass()->associate($insuranceClass);
 
-        // dd($product);
-
         $product->save();
 
         // Tariff
         $product->tariffs()->attach(Tariff::firstOrCreate([
-            "name" => $data["name"],
-            "value" => $data["price"],
+            "name"          => $data["name"],
+            "value"         => $data["price"],
             "is_percentage" => $request->has("is_percentage")
         ]));
 
@@ -111,10 +104,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product     = Product::find($id);
         $allBenefits = Benefit::all();
+        $allCharges  = Charge::all();
 
-        return view('edit-products')->with(["product" => $product, "allBenefits" => $allBenefits]);
+        return view('edit-products')->with([
+            "product"     => $product,
+            "allBenefits" => $allBenefits,
+            "allCharges"  => $allCharges
+        ]);
     }
 
     /**

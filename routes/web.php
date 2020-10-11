@@ -50,10 +50,17 @@ Route::get('/extras', 'ExtrasController@index')->name('extras');
 // Benefits
 Route::get('/benefits', 'BenefitsController@index')->name('benefits');
 
+// Charges
+Route::post('/charges/create', 'ChargesController@store')->name('charges.store');
+
+Route::delete('/charges/{id}', 'ChargesController@destroy')->name('charges.delete');
+
 // Settings
 Route::get('/settings', 'SettingController@index')->name('settings');
   
-Route::get('/settings/benefits', 'SettingController@benefits')->name('settings.benefits');
+// Route::get('/settings/benefits', 'SettingController@benefits')->name('settings.benefits');
+
+Route::get('/settings/charges', 'ChargesController@index')->name('settings.charges');
 
 Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
 

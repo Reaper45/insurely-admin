@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Traits\HandlesFile;
-use App\Insurer;
+use App\Charge;
+use App\InsuranceClass;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
-use Symfony\Component\Console\Input\Input;
 
-class InsurerController extends Controller
+class ChargesController extends Controller
 {
-    use HandlesFile;
-
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['logo']);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +15,10 @@ class InsurerController extends Controller
      */
     public function index()
     {
-        $insurers = Insurer::all();
+        $insuranceClasses = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $charges          = Charge::all();
 
-        return view('insurers')->with(["insurers" => $insurers]);
+        return view('charges', ['insuranceClasses' => $insuranceClasses->children, "charges" => $charges]);
     }
 
     /**
@@ -35,7 +28,7 @@ class InsurerController extends Controller
      */
     public function create()
     {
-        return view('new-insurer');
+        //
     }
 
     /**
@@ -47,27 +40,18 @@ class InsurerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'         => 'required|unique:insurers|max:255',
-            'email'        => 'required|email',
-            'logo'         => 'required|image',
-            'phone_number' => 'required|digits_between:9,12',
+            "name"  => "required|string|unique:charges|max:255",
+            "price" => "required|numeric",
         ]);
 
-        $logo = $request->file('logo');
+        $charge        = new Charge();
+        $charge->name  =  $data["name"];
+        $charge->value =  $data["price"];
+        $charge->is_percentage  =  $request->has("is_percentage");
 
-        $fileName = Uuid::uuid4(). '.' . $logo->extension();
-        $logo->storeAs('public', $fileName);
-        
-        $insurer = new Insurer();
+        $charge->save();
 
-        $insurer->name      = $data["name"];
-        $insurer->email     = $data["email"];
-        $insurer->telephone = $data["phone_number"];
-        $insurer->logo      = $fileName;
-
-        $insurer->save();
-
-        return redirect()->route("insurers");
+        return redirect()->back();
     }
 
     /**
@@ -112,16 +96,9 @@ class InsurerController extends Controller
      */
     public function destroy($id)
     {
-        $insurer = Insurer::find($id);
-        $insurer->delete();
-
-        return redirect()->back();
-        
-    }
+        $charge = Charge::find($id);
+        $charge->delete();
     
-    public function logo($id)
-    {
-        $insurer = Insurer::find($id);
-        return response($this->getFile('public', $insurer->logo), 200);
+        return redirect()->back();
     }
 }

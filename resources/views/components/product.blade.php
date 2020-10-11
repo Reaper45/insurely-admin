@@ -1,5 +1,5 @@
 <tr>
-    <td class="px-6 py-4  pl-0 whitespace-no-wrap">
+    <td class="px-6 py-4 whitespace-no-wrap">
         <div class="flex items-center">
             <div class="flex-shrink-0 h-10 w-10">
                 <img

@@ -15,16 +15,16 @@ class CreateBenefitChargesTable extends Migration
     {
         Schema::create('benefit_charges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('benefit_id');
-            $table->foreignId('charge_id');
+            $table->foreignId('benefit_id')->constrained()->onDelete('cascade');
+            $table->foreignId('charge_id')->constrained()->onDelete('cascade');
 
-            $table->foreign('benefit_id', 'bc_foreign_benefit')
-                    ->references('id')
-                    ->on('benefits');
+            // $table->foreign('benefit_id', 'bc_foreign_benefit')
+            //         ->references('id')
+            //         ->on('benefits');
 
-            $table->foreign('charge_id', 'bc_foreign_charges')
-                    ->references('id')
-                    ->on('charges');
+            // $table->foreign('charge_id', 'bc_foreign_charges')
+            //         ->references('id')
+            //         ->on('charges');
         });
     }
 

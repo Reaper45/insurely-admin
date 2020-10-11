@@ -16,15 +16,15 @@ class CreateProductChargesTable extends Migration
         Schema::create('product_charges', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('charge_id');
+            $table->foreignId('charge_id')->constrained()->onDelete('cascade');
 
             // $table->foreign('product_id', 'pc_foreign_product')
             //         ->references('id')
             //         ->on('products');
 
-            $table->foreign('charge_id', 'pc_foreign_charges')
-                    ->references('id')
-                    ->on('charges');
+            // $table->foreign('charge_id', 'pc_foreign_charges')
+            //         ->references('id')
+            //         ->on('charges');
         });
     }
 

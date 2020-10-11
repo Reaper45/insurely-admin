@@ -16,15 +16,15 @@ class CreateProductBenefitsTable extends Migration
         Schema::create('product_benefits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('benefit_id');
+            $table->foreignId('benefit_id')->constrained()->onDelete('cascade');;
 
             // $table->foreign('product_id', 'pb_foreign_product')
             //         ->references('id')
             //         ->on('products');
 
-            $table->foreign('benefit_id', 'pb_foreign_benefit')
-                    ->references('id')
-                    ->on('benefits');
+            // $table->foreign('benefit_id', 'pb_foreign_benefit')
+            //         ->references('id')
+            //         ->on('benefits');
 
             // $table->unique(['product_id', 'benefit_id']);
         });

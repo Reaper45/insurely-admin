@@ -84,7 +84,7 @@ class ApiController extends Controller
 
                 // Includes 000 (class) products
                 $optional_benefits_class = InsuranceClass::where("value", env("EXTRAS", "000"))->first();
-                $optional_benefits  = $optional_benefits_class->products->load('tariffs');
+                $optional_benefits       = $optional_benefits_class->products->load('tariffs');
 
                 foreach($product->benefits as $product_benefit) {
                     $product_benefit->with('tariffs');
@@ -101,22 +101,22 @@ class ApiController extends Controller
                 $charges = [];
                 foreach($product_charges as $product_charge) {
                     array_push($charges, [
-                        "id" => $product_charge->id,
-                        "name" => $product_charge->name,
+                        "id"    => $product_charge->id,
+                        "name"  => $product_charge->name,
                         "value" => $product_charge->is_percentage ? ceil(($product_charge->value / 100) * $sumInsured) : $product_charge->value
                     ]);
                 }
 
                 array_push($quoteArr, [
-                    'premium' => $product_tariffs_totals,
-                    'charges' => $charges,
-                    'sum_insured' => $sumInsured,
-                    "product_id" => $product->id,
-                    "name" => $product->name,
-                    "insurer" => $product->insurer,
-                    "benefits" => $product->benefits->load('tariffs'),
+                    'premium'           => $product_tariffs_totals,
+                    'charges'           => $charges,
+                    'sum_insured'       => $sumInsured,
+                    "product_id"        => $product->id,
+                    "name"              => $product->name,
+                    "insurer"           => $product->insurer,
+                    "benefits"          => $product->benefits->load('tariffs'),
                     "optional_benefits" => $optional_benefits,
-                    "has_ipf" => $product->has_ipf,
+                    "has_ipf"           => $product->has_ipf,
                 ]);
             }
 
@@ -130,9 +130,9 @@ class ApiController extends Controller
      */
     public function sendPaymentEmail(Request $request)
     {
-        $customer = $request->input('customer');
+        $customer       = $request->input('customer');
         $transaction_id = $request->input('transaction_id');
-        $quote = $request->input('quote');
+        $quote          = $request->input('quote');
 
         $payment = DB::table("transactions")->find($transaction_id);
 
@@ -145,7 +145,7 @@ class ApiController extends Controller
 
         $order_message = new Order($quote, $customer["name"],  $customer["email"]);
         $order_message->attach($file, [
-            "as" => $file_name,
+            "as"   => $file_name,
             "mime" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         ]);
 
@@ -159,12 +159,11 @@ class ApiController extends Controller
      */
     public function sendQuoteEmail(Request $request)
     {
-        $quote = $request->input('quote');
-        $to = $request->input('to');
-
-        $pdf = PDF::loadView('exports.quote', $quote)->setPaper('a4');
-
+        $quote   = $request->input('quote');
+        $to      = $request->input('to');
+        $pdf     = PDF::loadView('exports.quote', $quote)->setPaper('a4');
         $message = new Quote($quote);
+
         $message->attachData($pdf->output(), $quote["name"].'.pdf', [
             "mime" => "application/pdf"
         ]);
@@ -182,11 +181,10 @@ class ApiController extends Controller
         $otp = $this->generateSMSOTP();
 
         // Write token to DB
-        $mfa_details = new MFADetails;
-        $mfa_details->secret = $otp;
-        // $mfa_details->mfa_type = "";
+        $mfa_details               = new MFADetails;
+        $mfa_details->secret       = $otp;
         $mfa_details->phone_number = $phoneNumber;
-        $mfa_details->expires_in = date("m/d/Y h:i:s a", time() + $this->OTP_EXP_IN);
+        $mfa_details->expires_in   = date("m/d/Y h:i:s a", time() + $this->OTP_EXP_IN);
         
         $mfa_details->save();
 
@@ -201,10 +199,8 @@ class ApiController extends Controller
     public function verifyOTP(Request $request)
     {
         $phoneNumber = $request->input('phoneNumber');
-        $code = $request->input('code');
-        
-        $mfa = MFADetails::where('phone_number', $phoneNumber)->where('secret', $code)->first();
-        Log::info($mfa);
+        $code        = $request->input('code');
+        $mfa         = MFADetails::where('phone_number', $phoneNumber)->where('secret', $code)->first();
 
         if($mfa) {
             $has_expired = date("Y-m-d H:i:s") > $mfa->expires_in;
@@ -250,10 +246,10 @@ class ApiController extends Controller
         if(array_key_exists("CallbackMetadata", $stkCallback)){
             $metaData = $stkCallback["CallbackMetadata"]["Item"];
             $transaction = [
-                "description" => $stkCallback["ResultDesc"],
+                "description"         => $stkCallback["ResultDesc"],
                 "merchant_request_id" => $stkCallback["MerchantRequestID"],
                 "checkout_request_id" => $stkCallback["CheckoutRequestID"],
-                "result_code" => $stkCallback["ResultCode"],
+                "result_code"         => $stkCallback["ResultCode"],
             ];
 
             foreach($metaData as $item) {
@@ -277,7 +273,7 @@ class ApiController extends Controller
 
     public function checkTransaction(Request $request)
     {
-        $amount = $request->input('amount');
+        $amount       = $request->input('amount');
         $phone_number = $request->input('phone_number');
 
         $transaction = DB::table("transactions")->where("phone_number", $phone_number)->where("amount", $amount)->first();

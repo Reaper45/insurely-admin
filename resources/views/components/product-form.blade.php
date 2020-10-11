@@ -1,20 +1,6 @@
-<!-- Let all your things have their places; let each part of your business have its time. - Benjamin Franklin -->
-<div class="w-full mb-4">
 
-    <!--
-  Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
-  Read the documentation to get started: https://tailwindui.com/documentation
--->
-<!--
-  Custom select controls like this require a considerable amount of JS to implement from scratch. We're planning
-  to build some low-level libraries to make this easier with popular frameworks like React, Vue, and even Alpine.js
-  in the near future, but in the mean time we recommend these reference guides when building your implementation:
-
-  https://www.w3.org/TR/wai-aria-practices/#Listbox
-  https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
--->
-
-    
+<!-- ... -->
+<div class="w-full mb-4">    
     <div class="mb-4">
         <label for="name" class="block mb-2 text-sm leading-5 font-medium text-gray-700">Product name</label>
         <input name="name" value="{{old('name')}}" class="w-full @error('name') border-red-500 @enderror bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="text">
@@ -82,7 +68,7 @@
                 </ul>
             </div>
             <input type="hidden" name="insurer_id" x-bind:value="id" />
-             @error('insurer_id')
+            @error('insurer_id')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>        
             @enderror
         </div>
@@ -135,7 +121,7 @@
                 </ul>
             </div>
             <input type="hidden" name="category_id" x-bind:value="id" />
-             @error('category_id')
+            @error('category_id')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>        
             @enderror
         </div>
