@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => false]);
 
+// Product
 Route::get('/products', 'ProductController@index')->name('products');
 
 Route::get('/products/create', 'ProductController@create')->name('products.create');
@@ -27,6 +28,8 @@ Route::delete('/products/{id}', 'ProductController@destroy')->name('products.del
 Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
 
 Route::put('/products/{id}/edit', 'ProductController@update')->name('products.update');
+
+Route::delete('/products/charges/{id}', 'ProductController@removeCharge')->name('products.charges.delete');
 
 
 // Insurer

@@ -10,6 +10,7 @@ use App\Insurer;
 use App\Product;
 use App\Tariff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -125,15 +126,26 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            "benefits" => "required|array"
+            "benefits" => "sometimes|required|array",
+            "charges"  => "sometimes|required|array",
         ]);
 
         $product = Product::find($id);
 
-        foreach ($data["benefits"] as $key => $value) {
-            $benefit = Benefit::find($value);
-            
-            $product->benefits()->attach($benefit);
+        if($request->has("benefits")){
+            foreach ($data["benefits"] as $key => $value) {
+                $benefit = Benefit::find($value);
+                
+                $product->benefits()->attach($benefit);
+            }
+        }
+
+        if($request->has("charges")){
+            foreach ($data["charges"] as $key => $value) {
+                $benefit = Charge::find($value);
+                
+                $product->charges()->attach($benefit);
+            }
         }
 
         return redirect()->back();
@@ -149,5 +161,18 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeCharge($id)
+    {
+        DB::table('product_charges')->where('charge_id', $id)->delete();
+
+        return redirect()->back();
     }
 }

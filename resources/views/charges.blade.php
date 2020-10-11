@@ -39,7 +39,7 @@
                   From: "opacity-100 translate-y-0 sm:scale-100"
                   To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               -->
-              <div  x-show="open" class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+              <div x-show="open" class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                   <form class="w-full max-w-lg" method="post" action="{{ route("charges.store") }}">
                       @csrf
                       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

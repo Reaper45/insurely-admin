@@ -292,8 +292,8 @@
                             From: "opacity-100 translate-y-0 sm:scale-100"
                             To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         -->
-                        <div  x-show="open" class="bg-white rounded-lg overflow-auto shadow-xl transform transition-all " role="dialog" aria-modal="true" aria-labelledby="modal-headline" style="max-height: calc(100% - 100px)">
-                            <form class="w-full max-w-lg" method="post" action="">
+                        <div x-show="open" class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                            <form class="w-full max-w-lg" method="post" action="{{route('products.update', ["id" => $product->id, "_method" => "PUT"])}}">
                                 @csrf
                                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <fieldset>
@@ -311,7 +311,7 @@
                                                 @foreach ($allCharges as $charge)
                                                 <tr>
                                                     <td class="px-4 py-2">
-                                                        <input name="benefits[]" class="mr-2 leading-tight" value="{{$charge->id}}" type="checkbox">
+                                                        <input name="charges[]" class="mr-2 leading-tight" value="{{$charge->id}}" type="checkbox">
                                                     </td>
                                                     <td class="px-4 py-3">
                                                         <div class="text-sm leading-5 text-gray-900">{{ $charge->name }}</div>
@@ -379,7 +379,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        <form action="" method="post">
+                                        <form action="{{route('products.charges.delete', ["id" => $charge->id, "_method" => "DELETE"])}}" method="post">
                                             @csrf
                                             <button type="submit" class="inline-flex items-center px-2 py-1 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
                                                 Remove

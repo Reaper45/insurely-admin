@@ -23,7 +23,7 @@
             <div class="border-t border-gray-200"></div>
             <div class="py-1">
               <!-- classes list -->
-              <a href="{{route('settings.charges')}}" class="block px-4 py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Charges</a>   
+              <a href="{{route('settings.charges')}}" class="block px-4 py-3 font-medium text-base leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Charges</a>   
             </div>
           </div>
         </div>
