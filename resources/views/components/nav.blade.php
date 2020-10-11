@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <a href="{{ route('products') }}" >
+                    <a href="{{ route('insurers') }}" >
                         <img class="h-8" src="{{ asset('img/logo.png') }}" alt="Workflow logo" />
                     </a>
                 </div>
@@ -12,7 +12,6 @@
                         <a href="{{ route('insurers') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-patners">Patners</a>
                         <a href="{{ route('products') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-products">Products</a>
                         <a href="{{ route('benefits') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-benefits">Benefits</a>
-                        {{-- <a href="{{ route('extras') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-extras">Extras</a> --}}
                         <a href="{{ route('settings') }}" class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-white hover:text-gray-700 focus:text-blue-800 nav-item" id="nav-item-settings">Settings</a>
                     </div>
                 </div>
@@ -26,31 +25,18 @@
                     </button> --}}
 
                     <!-- Profile dropdown -->
-                    <div @click.away="open = false" x-data="{ open: false }" class="ml-3 relative">
+                    <div class="ml-3 relative">
                         <div>
-                            <button  @click="open = !open"  class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid" id="user-menu" aria-label="User menu" aria-haspopup="true">
-                                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                            </button>
-                        </div>
-                        <!--
-                            Profile dropdown panel, show/hide based on dropdown state.
-
-                            Entering: "transition ease-out duration-100"
-                            From: "transform opacity-0 scale-95"
-                            To: "transform opacity-100 scale-100"
-                            Leaving: "transition ease-in duration-75"
-                            From: "transform opacity-100 scale-100"
-                            To: "transform opacity-0 scale-95"
-                        -->
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
-                            <div  x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                            <div  class="max-w-xs flex items-center text-sm rounded-full text-grey font-medium focus:outline-none" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                                {{ Auth::user()->name}}
                                 <a
-                                    class="block px-4 py-2 text-sm text-blue-700 hover:bg-blue-100"
+                                    class="block px-3 py-1 ml-4 rounded text-sm text-blue-700 bg-blue-100"
                                     role="menuitem"
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                     Sign out
                                 </a>
+                                {{-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> --}}
                             </div>
                         </div>
                     </div>
