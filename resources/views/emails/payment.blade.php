@@ -22,7 +22,7 @@
             </div>
         </div>
         
-        <div style="background: #fff; margin: 0 auto; width: 90%; max-width: 700px; box-sizing: border-box; border-radius: 8px;">
+        <div style="background: #fff; margin: 0 auto; width: 90%; max-width: 700px; min-width: 500px; box-sizing: border-box; border-radius: 8px;">
 
             <div style="width: 100%; margin: 0 auto; padding: 2rem; box-sizing: border-box;">
                 <div style="border: solid 1px #e2e8f0; border-radius: 8px;">
