@@ -28,4 +28,18 @@ class BenefitsController extends Controller
 
         return view('benefits')->with(["benefits" => $benefits]);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $charge = Benefit::find($id);
+        $charge->delete();
+    
+        return redirect()->back();
+    }
 }

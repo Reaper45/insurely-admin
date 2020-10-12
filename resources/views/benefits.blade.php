@@ -62,13 +62,10 @@
                   <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Description
                   </th>
-                  {{-- <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Optional
-                  </th> --}}
                   <th class="px-6 py-3 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                     Adjustable
                   </th>
-                  {{-- <th class="px-6 py-3"></th> --}}
+                  <th class="px-6 py-3"></th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
@@ -83,28 +80,19 @@
                         {{ $benefit->description }}
                       </div>
                     </td>
-                    {{-- @if ($benefit->is_optional)
-                      <td class="px-6 py-4 whitespace-no-wrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          Optional
-                        </span>
-                      </td>
-                    @else
-                      <td class="px-6 py-4 whitespace-no-wrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                          In built
-                        </span>
-                      </td>
-                    @endif --}}
-                    
                     <td class="px-6 py-4 whitespace-no-wrap">
                       <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         {{$benefit->is_adjustable ? "Adjustable" : ""}}
                       </span>
                     </td>
-                    {{-- <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td> --}}
+                    <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                      <form action="{{ route("benefits.delete", ["id" => $benefit->id, "_method" => "DELETE"]) }}" method="post">
+                        @csrf
+                        <button type="submit" class="inline-flex items-center px-2 py-1 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
+                          Delete
+                        </button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
 

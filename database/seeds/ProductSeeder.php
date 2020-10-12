@@ -51,23 +51,23 @@ class ProductSeeder extends Seeder
                             ],
                             [
                                 ["name"  => "Radio cassette"],
-                                ["limit" => "Kshs. 30,000/="]
+                                ["limit" => "Kshs. 30,000/-"]
                             ],
                             [
                                 ["name"  => "Windscreen & window glass"],
-                                ["limit" => "Upto Kshs. 30, 000/="]
+                                ["limit" => "Upto Kshs. 30, 000/-"]
                             ],
                             [
                                 ["name"  => "Medical expenses"],
-                                ["limit" => "Kshs. 30,000/="]
+                                ["limit" => "Kshs. 30,000/-"]
                             ],
                             [
                                 ["name"  => "Towing charges"],
-                                ["limit" => "Kshs. 50,000/="]
+                                ["limit" => "Kshs. 50,000/-"]
                             ],
                             [
                                 ["name"  => "Repair Authority"],
-                                ["limit" => "kshs. 50,000/="]
+                                ["limit" => "kshs. 50,000/-"]
                             ],
                             [
                                 ["name"  => "Geographical"],
@@ -129,15 +129,15 @@ class ProductSeeder extends Seeder
                         "benefits" => [
                             [
                                 ["name"  => "Third party only"],
-                                ["limit" => "kshs. 7,500/= "]
+                                ["limit" => "Kshs. 7,500/- "]
                             ],
                             [
                                 ["name"  => "New & Young"],
-                                ["limit" => "kshs. 10,000/= additional"]
+                                ["limit" => "Kshs. 10,000/- additional"]
                             ],
                             [
                                 ["name"  => "Third party property damage"],
-                                ["limit" => "kshs. 20,000,000/="]
+                                ["limit" => "Kshs. 20,000,000/-"]
                             ],
                             [
                                 ["name"  => "Passenger Legal Liability"],
@@ -169,11 +169,11 @@ class ProductSeeder extends Seeder
                             ],
                             [
                                 ["name"  => "Third party only"],
-                                ["limit" => "Kshs. 7,500/= "]
+                                ["limit" => "Kshs. 7,500/- "]
                             ],
                             [
                                 ["name"  => "New & Young"],
-                                ["limit" => "kshs. 10,000/= additional"]
+                                ["limit" => "kshs. 10,000/- additional"]
                             ],
                             [
                                 ["name"  => "Windscreen"],
