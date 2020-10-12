@@ -56,6 +56,8 @@ Route::get('/benefits', 'BenefitsController@index')->name('benefits');
 
 Route::delete('/benefits/{id}', 'BenefitsController@destroy')->name('benefits.delete');
 
+Route::post('/benefits/create', 'BenefitsController@store')->name('benefits.store');
+
 // Charges
 Route::post('/charges/create', 'ChargesController@store')->name('charges.store');
 
