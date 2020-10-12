@@ -13,6 +13,9 @@
     </div>
 </x-header>
 <main>
+    @if (session('status'))
+      <x-alert :message="session('status')" />
+    @endif
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Products table -->
         <div class="flex flex-col">

@@ -67,7 +67,7 @@ class InsurerController extends Controller
 
         $insurer->save();
 
-        return redirect()->route("insurers");
+        return redirect()->route("insurers")->with('status', 'Insurer created successful!');
     }
 
     /**

@@ -51,7 +51,7 @@ class ChargesController extends Controller
 
         $charge->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', 'Charge created successful!');
     }
 
     /**

@@ -111,7 +111,7 @@ class ProductController extends Controller
             "is_percentage" => $request->has("is_percentage")
         ]));
 
-        return redirect()->route("products");
+        return redirect()->route("products")->with('status', 'Product created successful!');
     }
 
     /**
