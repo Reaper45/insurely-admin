@@ -6,7 +6,6 @@ use App\Http\Controllers\Traits\HandlesFile;
 use App\Insurer;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Console\Input\Input;
 
 class InsurerController extends Controller
 {

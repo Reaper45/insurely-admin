@@ -48,9 +48,6 @@ Route::put('/insurers/{id}/edit', 'InsurerController@update')->name('insurers.up
 
 Route::get('/insurers/{id}/logo', 'InsurerController@logo')->name("insurers.avatar");
 
-// Extras
-Route::get('/extras', 'ExtrasController@index')->name('extras');
-
 // Benefits
 Route::get('/benefits', 'BenefitsController@index')->name('benefits');
 
@@ -65,10 +62,11 @@ Route::delete('/charges/{id}', 'ChargesController@destroy')->name('charges.delet
 
 // Settings
 Route::get('/settings', 'SettingController@index')->name('settings');
-  
-// Route::get('/settings/benefits', 'SettingController@benefits')->name('settings.benefits');
+
+Route::get('/settings/extras', 'ExtrasController@index')->name('settings.extras');
 
 Route::get('/settings/charges', 'ChargesController@index')->name('settings.charges');
 
-Route::get('/settings/{class_id}', 'SettingController@insuranceClass')->name('settings.class');
+Route::delete('/settings/categories/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.categories.delete');
 
+Route::delete('/settings/classes/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.delete');

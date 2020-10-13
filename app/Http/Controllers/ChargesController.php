@@ -44,9 +44,10 @@ class ChargesController extends Controller
             "price" => "required|numeric",
         ]);
 
-        $charge        = new Charge();
-        $charge->name  =  $data["name"];
-        $charge->value =  $data["price"];
+        $charge = new Charge();
+
+        $charge->name           =  $data["name"];
+        $charge->value          =  $data["price"];
         $charge->is_percentage  =  $request->has("is_percentage");
 
         $charge->save();

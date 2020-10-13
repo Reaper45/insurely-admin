@@ -40,6 +40,7 @@ class InsuranceClassSeeder extends Seeder
             "name"  => "Extra products",
             "value" =>  env("EXTRAS", "000")
         ]);
+
         $optional_benefit->save();
     }
 }	

@@ -18,16 +18,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $insuranceClasses = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
 
-        return view('settings', ['insuranceClasses' => $insuranceClasses->children ]);
-    }
-
-    public function insuranceClass($class_id)
-    {
-        $insuranceClasses = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
-        $insuranceClass   = InsuranceClass::find($class_id);
-
-        return view('categories', ['insuranceClasses' => $insuranceClasses->children, 'insuranceClass' => $insuranceClass]);
+        return view('motor-private', ['motorPrivate' => $motorPrivate ]);
     }
 }

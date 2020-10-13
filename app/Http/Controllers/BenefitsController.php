@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Benefit;
 use App\Tariff;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class BenefitsController extends Controller
 {
@@ -58,7 +59,7 @@ class BenefitsController extends Controller
         if($request->has("price")) {
             $benefit->tariffs()->attach(
                 Tariff::firstOrCreate([
-                    "name"          => $data["name"],
+                    "name"          => $data["name"]. '_' .Uuid::uuid4(),
                     "value"         => $data["price"],
                     "is_percentage" => $request->has("is_percentage")
                 ])
