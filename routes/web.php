@@ -17,36 +17,36 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['register' => false]);
 
 // Product
-Route::get('/products', 'ProductController@index')->name('products');
+Route::get('/products', 'ProductsController@index')->name('products');
 
-Route::get('/products/create', 'ProductController@create')->name('products.create');
+Route::get('/products/create', 'ProductsController@create')->name('products.create');
 
-Route::post('/products/create', 'ProductController@store')->name('products.store');
+Route::post('/products/create', 'ProductsController@store')->name('products.store');
 
-Route::delete('/products/{id}', 'ProductController@destroy')->name('products.delete');
+Route::delete('/products/{id}', 'ProductsController@destroy')->name('products.delete');
 
-Route::get('/products/{id}/edit', 'ProductController@edit')->name('products.edit');
+Route::get('/products/{id}/edit', 'ProductsController@edit')->name('products.edit');
 
-Route::put('/products/{id}/edit', 'ProductController@update')->name('products.update');
+Route::put('/products/{id}/edit', 'ProductsController@update')->name('products.update');
 
-Route::delete('/products/charges/{id}', 'ProductController@removeCharge')->name('products.charges.delete');
+Route::delete('/products/charges/{id}', 'ProductsController@removeCharge')->name('products.charges.delete');
 
-Route::delete('/products/benefits/{id}', 'ProductController@removeBenefit')->name('products.benefits.delete');
+Route::delete('/products/benefits/{id}', 'ProductsController@removeBenefit')->name('products.benefits.delete');
 
 // Insurer
-Route::get('/', 'InsurerController@index')->name('insurers');
+Route::get('/', 'InsurersController@index')->name('insurers');
 
-Route::get('/insurers/create', 'InsurerController@create')->name('insurers.create');
+Route::get('/insurers/create', 'InsurersController@create')->name('insurers.create');
 
-Route::post('/insurers/create', 'InsurerController@store')->name('insurers.store');
+Route::post('/insurers/create', 'InsurersController@store')->name('insurers.store');
 
-Route::delete('/insurers/{id}', 'InsurerController@destroy')->name('insurers.delete');
+Route::delete('/insurers/{id}', 'InsurersController@destroy')->name('insurers.delete');
 
-Route::get('/insurers/{id}/edit', 'InsurerController@edit')->name('insurers.edit');
+Route::get('/insurers/{id}/edit', 'InsurersController@edit')->name('insurers.edit');
 
-Route::put('/insurers/{id}/edit', 'InsurerController@update')->name('insurers.update');
+Route::put('/insurers/{id}/edit', 'InsurersController@update')->name('insurers.update');
 
-Route::get('/insurers/{id}/logo', 'InsurerController@logo')->name("insurers.avatar");
+Route::get('/insurers/{id}/logo', 'InsurersController@logo')->name("insurers.avatar");
 
 // Benefits
 Route::get('/benefits', 'BenefitsController@index')->name('benefits');
@@ -60,8 +60,11 @@ Route::post('/charges/create', 'ChargesController@store')->name('charges.store')
 
 Route::delete('/charges/{id}', 'ChargesController@destroy')->name('charges.delete');
 
+// Catagories
+Route::post('/categories/create', 'CategoriesController@store')->name('categories.store');
+
 // Settings
-Route::get('/settings', 'SettingController@index')->name('settings');
+Route::get('/settings', 'SettingsController@index')->name('settings');
 
 Route::get('/settings/extras', 'ExtrasController@index')->name('settings.extras');
 

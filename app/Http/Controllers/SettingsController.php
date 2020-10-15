@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\InsuranceClass;
 
-class SettingController extends Controller
+class SettingsController extends Controller
 {
     public function __construct()
     {
@@ -18,8 +18,9 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $motorPrivate = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $motorPrivate     = InsuranceClass::where("value", env("MOTOR_PRIVATE", "600"))->first();
+        $insuranceClasses = InsuranceClass::all();
 
-        return view('motor-private', ['motorPrivate' => $motorPrivate ]);
+        return view('motor-private', ['motorPrivate' => $motorPrivate, "insuranceClasses" => $insuranceClasses ]);
     }
 }

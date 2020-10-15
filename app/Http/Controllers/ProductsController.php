@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
-class ProductController extends Controller
+class ProductsController extends Controller
 {
     public function __construct()
     {

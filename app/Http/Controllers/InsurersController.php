@@ -7,7 +7,7 @@ use App\Insurer;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
-class InsurerController extends Controller
+class InsurersController extends Controller
 {
     use HandlesFile;
 
