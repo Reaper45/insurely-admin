@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class InsuranceClassForm extends Component
 {
+    public $insuranceClasses;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($insuranceClasses)
     {
-        //
+        $this->insuranceClasses = $insuranceClasses;
     }
 
     /**

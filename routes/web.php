@@ -63,6 +63,13 @@ Route::delete('/charges/{id}', 'ChargesController@destroy')->name('charges.delet
 // Catagories
 Route::post('/categories/create', 'CategoriesController@store')->name('categories.store');
 
+Route::delete('/categories/{id}', 'CategoriesController@destroy')->name('categories.delete');
+
+// Insurance classes
+Route::post('/classes/create', 'InsuranceClassesController@store')->name('classes.store');
+
+Route::delete('/classes/{id}', 'InsuranceClassesController@destroy')->name('classes.delete');
+
 // Settings
 Route::get('/settings', 'SettingsController@index')->name('settings');
 
@@ -70,6 +77,6 @@ Route::get('/settings/extras', 'ExtrasController@index')->name('settings.extras'
 
 Route::get('/settings/charges', 'ChargesController@index')->name('settings.charges');
 
-Route::delete('/settings/categories/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.categories.delete');
+// Route::delete('/settings/categories/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.categories.delete');
 
-Route::delete('/settings/classes/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.delete');
+// Route::delete('/settings/classes/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.delete');

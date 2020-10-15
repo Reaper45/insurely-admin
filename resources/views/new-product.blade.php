@@ -129,6 +129,7 @@
                         </div>
                         
                       </div>
+                      <div class="mb-4 border-t border-gray-300"></div>
                       <div class="sm:flex sm:flex-row-reverse justify-between	">
                           <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                               <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">

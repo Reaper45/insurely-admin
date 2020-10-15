@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\InsuranceClass;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class InsuranceClassesController extends Controller
 {
     /**
      * Store a newly created resource in storage.
@@ -19,19 +18,22 @@ class CategoriesController extends Controller
         $data = $request->validate([
             "name"  => "required|string|unique:categories|max:255",
             "code" => "required|string|unique:categories|max:255",
-            "class_id" => "required|exists:App\InsuranceClass,id",
+            "parent_id" => "sometimes|required|exists:App\InsuranceClass,id",
         ]);
 
-        $category       = new Category();
-        $category->name = $data["name"];
-        $category->code = $data["code"];
+        $insuranceClass       = new InsuranceClass();
+        $insuranceClass->name = $data["name"];
+        $insuranceClass->value = $data["code"];
 
-        $insuranceClass = InsuranceClass::find($data["class_id"]);
+        $parent = InsuranceClass::find($data["parent_id"]);
 
-        $category->insuranceClass()->associate($insuranceClass );
-        $category->save();
+        if($request->has("parent_id")) {
+            $insuranceClass->parent()->associate($parent);
+        }
 
-        return redirect()->back()->with('status', 'Category created successful!');
+        $insuranceClass->save();
+
+        return redirect()->back()->with('status', 'Class created successful!');
     }
 
     /**
@@ -42,7 +44,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $charge = Category::find($id);
+        $charge = InsuranceClass::find($id);
         $charge->delete();
     
         return redirect()->back();
