@@ -20,6 +20,8 @@
             <a href="{{route('settings.extras')}}" class="block px-4 py-3 font-medium text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Extras</a>
             <div class="border-t border-gray-200"></div>
             <a href="{{route('settings.charges')}}" class="block px-4 py-3 font-medium text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">Charges</a>   
+            <div class="border-t border-gray-200"></div>
+            <a href="{{route('settings.ipf')}}" class="block px-4 py-3 font-medium text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" role="menuitem">IPF</a> 
           </div>
         </div>
         <div class="w-4/5 h-12">

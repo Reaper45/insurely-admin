@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="mb-2 px-2 text-gray-500 text-sm font-medium">
-      Classes
+      Manage motor private classes
     </div>
   </div>
 
@@ -91,7 +91,7 @@
     <div class="flex items-center justify-between">
 
       <div class="px-2 text-gray-500 text-sm font-medium">
-        Categories
+        Manage motor private categories
       </div>
       <div  @click.away="open = false" x-data="{ open: false }"  class="relative mb-4   " >
 

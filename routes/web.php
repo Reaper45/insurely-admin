@@ -77,6 +77,5 @@ Route::get('/settings/extras', 'ExtrasController@index')->name('settings.extras'
 
 Route::get('/settings/charges', 'ChargesController@index')->name('settings.charges');
 
-// Route::delete('/settings/categories/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.categories.delete');
+Route::get('/settings/ipf', 'SettingsController@ipf')->name('settings.ipf');
 
-// Route::delete('/settings/classes/{id}', 'ExtrasController@deleteClassCategory')->name('settings.classes.delete');

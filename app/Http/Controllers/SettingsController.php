@@ -10,8 +10,8 @@ class SettingsController extends Controller
     {
         $this->middleware('auth');
     }
-    //
-        /**
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,5 +22,15 @@ class SettingsController extends Controller
         $insuranceClasses = InsuranceClass::all();
 
         return view('motor-private', ['motorPrivate' => $motorPrivate, "insuranceClasses" => $insuranceClasses ]);
+    }
+
+    /**
+     * Display ipf settings.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ipf()
+    {
+        return view('ipf');
     }
 }

@@ -6,7 +6,7 @@
         Extras
       </div>
       <div class="mb-2 px-2 text-gray-500 text-sm font-medium">
-        Categories
+        Manage extras categories
       </div>
     </div>
     <!--
