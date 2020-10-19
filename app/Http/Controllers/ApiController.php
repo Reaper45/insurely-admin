@@ -310,7 +310,7 @@ class ApiController extends Controller
                 "description"           => $body["BillRefNumber"],
                 "merchant_request_id"   => $body["ThirdPartyTransID"],
                 "checkout_request_id"   => $body["TransID"],
-                "type"                  => $body["TransactionType"],
+                "result_code"           => $body["TransactionType"],
                 "transaction_time"      => $body["TransTime"],
             ];
 
