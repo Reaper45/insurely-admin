@@ -47,6 +47,8 @@ Route::prefix('v1')->group(function (){
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');
 
+    Route::post('/manual-c2b-callback',  'ApiController@c2bCallback');
+
     Route::post('/transaction',  'ApiController@checkTransaction');
 
     Route::post('/email/quote', 'ApiController@sendQuoteEmail');
