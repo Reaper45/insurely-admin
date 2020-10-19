@@ -282,4 +282,42 @@ class ApiController extends Controller
 
         return response($this->api_response((bool)$transaction, ["received" => (bool)$transaction, "transaction" => $transaction], $message), 200);
     }
+
+    public function c2bValidationCallback(Request $request)
+    {
+        $body = $request->input('body');
+
+        if(array_key_exists("MSISDN", $body)){
+
+            $invoice_number =  $body["BillRefNumber"];
+
+            // Check if invoice number exists
+
+            return response($this->api_response(true, ["ResultCode" => 0, "ResultDesc" => "Accepted"], null), 200);
+        }
+        return response($this->api_response(true, ["ResultCode" => 1, "ResultDesc" => "Rejected"], null), 200);
+
+    }
+
+    public function c2bConfirmationCallback(Request $request)
+    {
+        $body = $request->input('body');
+
+        if(array_key_exists("MSISDN", $body)){
+
+            $transaction = [
+                "phone_number"          => $body["MSISDN"],
+                "amount"                => $body["TransAmount"],
+                "mpesa_code"            => $body["TransID"],
+                "description"           => $body["BillRefNumber"],
+                "merchant_request_id"   => $body["ThirdPartyTransID"],
+                "checkout_request_id"   => $body["TransID"],
+                "type"                  => $body["TransactionType"],
+                "transaction_time"      => $body["TransTime"],
+            ];
+
+            DB::table("transactions")->insert($transaction);
+        }
+        return response(200);
+    }
 }
