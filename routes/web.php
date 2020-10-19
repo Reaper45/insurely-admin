@@ -46,7 +46,7 @@ Route::get('/insurers/{id}/edit', 'InsurersController@edit')->name('insurers.edi
 
 Route::put('/insurers/{id}/edit', 'InsurersController@update')->name('insurers.update');
 
-Route::get('/insurers/{id}/logo', 'InsurersController@logo')->name("insurers.avatar");
+Route::get('/insurers/{id}/logo', 'InsurersController@logo')->name('insurers.avatar');
 
 // Benefits
 Route::get('/benefits', 'BenefitsController@index')->name('benefits');
