@@ -283,9 +283,8 @@ class ApiController extends Controller
 
     public function c2bValidationCallback(Request $request)
     {
-        $body = $request->input('body');
 
-        if(array_key_exists("MSISDN", $body)){
+        if($request->input('MSISDN')){
 
             $invoice_number =  $body["BillRefNumber"];
 
@@ -299,19 +298,16 @@ class ApiController extends Controller
 
     public function c2bConfirmationCallback(Request $request)
     {
-        $body = $request->input('body');
-
-        if(array_key_exists("MSISDN", $body)){
-
+        if($request->input('MSISDN')){
             $transaction = [
-                "phone_number"          => $body["MSISDN"],
-                "amount"                => $body["TransAmount"],
-                "mpesa_code"            => $body["TransID"],
-                "description"           => $body["BillRefNumber"],
-                "merchant_request_id"   => $body["ThirdPartyTransID"],
-                "checkout_request_id"   => $body["TransID"],
-                "result_code"           => $body["TransactionType"],
-                "transaction_time"      => $body["TransTime"],
+                "phone_number"          => $request->input("MSISDN"),
+                "amount"                => $request->input("TransAmount"),
+                "mpesa_code"            => $request->input("TransID"),
+                "description"           => $request->input("BillRefNumber"),
+                "merchant_request_id"   => $request->input("ThirdPartyTransID"),
+                "checkout_request_id"   => $request->input("TransID"),
+                "result_code"           => $request->input("TransactionType"),
+                "transaction_time"      => $request->input("TransTime"),
             ];
 
             DB::table("transactions")->insert($transaction);
