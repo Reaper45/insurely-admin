@@ -47,7 +47,9 @@ Route::prefix('v1')->group(function (){
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');
 
-    Route::post('/manual-c2b-callback',  'ApiController@c2bCallback');
+    Route::post('/manual-c2b-confirmation',  'ApiController@c2bConfirmationCallback');
+
+    Route::post('/manual-c2b-verification',  'ApiController@c2bVerificationCallback');
 
     Route::post('/transaction',  'ApiController@checkTransaction');
 
