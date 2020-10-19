@@ -16,13 +16,13 @@ class InsuranceClassesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "name"  => "required|string|unique:categories|max:255",
-            "code" => "required|string|unique:categories|max:255",
+            "name"      => "required|string|unique:categories|max:255",
+            "code"      => "required|string|unique:categories|max:255",
             "parent_id" => "sometimes|required|exists:App\InsuranceClass,id",
         ]);
 
-        $insuranceClass       = new InsuranceClass();
-        $insuranceClass->name = $data["name"];
+        $insuranceClass        = new InsuranceClass();
+        $insuranceClass->name  = $data["name"];
         $insuranceClass->value = $data["code"];
 
         $parent = InsuranceClass::find($data["parent_id"]);
