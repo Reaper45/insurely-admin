@@ -11,14 +11,12 @@ use App\InsuranceClass;
 use App\Mail\Payment;
 use App\MFADetails;
 use App\Utils\SMS;
-use Illuminate\Support\Facades\Log;
 use App\Mail\Quote;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Exports\OrderExport;
 use App\Mail\Order;
-use App\Mail\Test;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApiController extends Controller

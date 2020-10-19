@@ -17,8 +17,8 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "name"  => "required|string|unique:categories|max:255",
-            "code" => "required|string|unique:categories|max:255",
+            "name"     => "required|string|unique:categories|max:255",
+            "code"     => "required|string|unique:categories|max:255",
             "class_id" => "required|exists:App\InsuranceClass,id",
         ]);
 
