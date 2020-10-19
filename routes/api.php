@@ -42,7 +42,7 @@ Route::prefix('v1')->group(function (){
     // Class categories
     Route::get('/classes/{class_id}/categories', 'ApiController@getCategories');
 
-    Route::get('/insurer/{id}/logo/', 'InsurerController@logo')->name("api.avatar");
+    Route::get('/insurer/{id}/logo', 'InsurersController@logo')->name("api.avatar");
 
     // Payments
     Route::post('/callback',  'ApiController@mpesaCallback');
