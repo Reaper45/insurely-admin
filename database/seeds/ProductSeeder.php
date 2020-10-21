@@ -55,10 +55,10 @@ class ProductSeeder extends Seeder
                             ],
                             [
                                 ["name"  => "Windscreen & window glass"],
-                                ["limit" => "Upto Kshs. 30, 000/-", "min" => 30000],
+                                ["limit" => "Upto Kshs. 30, 000/-", "min" => 30000, "is_adjustable" => true],
                                 [
                                     // benefit tariff
-                                    "name"          => "windscreen",
+                                    "name"          => "Windscreen & window glass",
                                     "value"         => 10,
                                     "is_active"     => true,
                                     "is_percentage" => true,
@@ -183,7 +183,7 @@ class ProductSeeder extends Seeder
                                 ["limit" => "kshs. 10,000/- additional"]
                             ],
                             [
-                                ["name"  => "Windscreen"],
+                                ["name"  => "Windscreen & window glass"],
                                 ["limit" => "Kshs. 30,000/-", "is_adjustable" => true,]
                             ],
                             [
