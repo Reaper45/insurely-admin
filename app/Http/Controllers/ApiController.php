@@ -157,8 +157,11 @@ class ApiController extends Controller
      */
     public function sendQuoteEmail(Request $request)
     {
-        $quote   = $request->input('quote');
-        $to      = $request->input('to');
+        $quote         = $request->input('quote');
+        $email         = $request->input('email');
+        $name          = $request->input('name');
+        $phoneNumber   = $request->input('phoneNumber');
+
         $pdf     = PDF::loadView('exports.quote', $quote)->setPaper('a4');
         $message = new Quote($quote);
 
@@ -166,7 +169,7 @@ class ApiController extends Controller
             "mime" => "application/pdf"
         ]);
 
-        Mail::to($to)->send($message);            
+        Mail::to($email)->send($message);            
         
         return response($this->api_response(true, null, "Request completed"), 200);
     }
