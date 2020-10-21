@@ -17,6 +17,8 @@ class CreateBenefitsTable extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->string("limit")->nullable();
+            $table->float("min")->nullable();
+            $table->float("max")->nullable();
             $table->string("description")->nullable();
             $table->boolean("is_optional")->default(false);
             $table->boolean("is_adjustable")->default(false);
