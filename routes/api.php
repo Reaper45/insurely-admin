@@ -52,6 +52,8 @@ Route::prefix('v1')->group(function (){
     Route::post('/manual-c2b-verification',  'ApiController@c2bVerificationCallback');
 
     Route::post('/transaction',  'ApiController@checkTransaction');
+    
+    Route::post('/check-c2b-transaction',  'ApiController@checkC2BTransaction');
 
     Route::post('/email/quote', 'ApiController@sendQuoteEmail');
 

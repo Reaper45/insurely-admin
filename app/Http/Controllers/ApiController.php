@@ -281,6 +281,19 @@ class ApiController extends Controller
         return response($this->api_response((bool)$transaction, ["received" => (bool)$transaction, "transaction" => $transaction], $message), 200);
     }
 
+    public function checkC2BTransaction(Request $request)
+    {
+        $amount         = $request->input('amount');
+        $phone_number   = $request->input('phone_number');
+        $mpesa_ref      = $request->input('mpesa_ref');
+
+        $transaction = DB::table("transactions")->where("mpesa_code", $mpesa_ref)->where("phone_number", $phone_number)->where("amount", $amount)->first();
+        
+        $message = $transaction ? "Payment received" : "Full payment not received";
+
+        return response($this->api_response((bool)$transaction, ["received" => (bool)$transaction, "transaction" => $transaction], $message), 200);
+    }
+
     public function c2bValidationCallback(Request $request)
     {
 
@@ -304,7 +317,7 @@ class ApiController extends Controller
                 "amount"                => $request->input("TransAmount"),
                 "mpesa_code"            => $request->input("TransID"),
                 "description"           => $request->input("BillRefNumber"),
-                "merchant_request_id"   => $request->input("ThirdPartyTransID"),
+                "merchant_request_id"   => $request->input("BillRefNumber"),
                 "checkout_request_id"   => $request->input("TransID"),
                 "result_code"           => $request->input("TransactionType"),
                 "transaction_time"      => $request->input("TransTime"),
