@@ -326,7 +326,12 @@ class ApiController extends Controller
                 "transaction_time"      => $request->input("TransTime"),
             ];
 
-            DB::table("transactions")->insert($transaction);
+            $transaction = DB::table("transactions")->where("phone_number", $request->input("MSISDN"))->where("mpesa_code", $request->input("mpesa_code"))->first();
+        
+            if (!$transaction) {
+                DB::table("transactions")->insert($transaction);
+            }
+
         }
         return response(200);
     }
