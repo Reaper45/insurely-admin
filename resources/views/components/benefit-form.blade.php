@@ -37,7 +37,7 @@
                 <label for="description" class="block mb-2 text-sm leading-5 font-medium text-gray-700">Description</label>
                 <textarea name="description" value="{{old('description')}}" class="w-full @error('description') border-red-500 @enderror bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="text"></textarea>
             </div>
-            @error('limit')
+            @error('description')
                 <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
             @enderror
 

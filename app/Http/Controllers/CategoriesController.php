@@ -42,8 +42,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $charge = Category::find($id);
-        $charge->delete();
+        $category = Category::find($id);
+        $category->delete();
     
         return redirect()->back();
     }
