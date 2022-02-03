@@ -12,7 +12,7 @@ class SMS
         $sms = $AT->sms();
 
         $sms->send([
-            'to'      => $to,
+            'to'      => "+". $to,
             'message' => $message
         ]);
     }
