@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd5331920039282f08a51fc7882438ef",
+    "content-hash": "92682cbb6e8c2b3536bddb010f9f0cc8",
     "packages": [
         {
             "name": "africastalking/africastalking",
@@ -7916,7 +7916,9 @@
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "8.0.11"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
 }
