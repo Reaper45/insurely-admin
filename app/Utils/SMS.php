@@ -2,14 +2,18 @@
 
 namespace App\Utils;
 
+use AfricasTalking\SDK\AfricasTalking;
+
 class SMS
 {
     public static function sendSMS($to, $message)
     {
-        $metech_url = "https://ke.mtechcomm.com/bulkAPIV2/?user=Henry&pass=c74ef0b6b0cfbb3779ce3bb1145a94db0e784f77&shortCode=INSURELY&MSISDN=". $to ."&MESSAGE=". $message;
+        $AT  = new AfricasTalking(env("AT_USERNAME"), env("AT_API_KEY"));
+        $sms = $AT->sms();
 
-        $client = new \GuzzleHttp\Client(['verify' => false ]);
-        $response = $client->get($metech_url);
-        return $response;
+        $sms->send([
+            'to'      => $to,
+            'message' => $message
+        ]);
     }
 }
